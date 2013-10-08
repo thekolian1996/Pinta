@@ -240,11 +240,12 @@ namespace Pinta.Core
 			return inflated;
 		}
 		
-		public static Cairo.Region RectanglesToRegion(Cairo.Rectangle[] rects)
+		public static Cairo.Region RectanglesToRegion(Cairo.RectangleInt[] rects)
         {
-            Cairo.Region reg = Cairo.Rectangle(Gdk.Rectangle.Zero);
-            foreach (Cairo.Rectangle r in rects)
-                reg.Union(r);
+            Cairo.Region reg = new Cairo.Region();
+            foreach (Cairo.RectangleInt r in rects)
+		reg.UnionRectangle (r);
+               
             return reg;
         }
 		
