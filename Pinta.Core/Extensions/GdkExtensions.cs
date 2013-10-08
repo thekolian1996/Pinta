@@ -34,30 +34,24 @@ namespace Pinta.Core
 		// Invalidate the whole thing
 		public static void Invalidate (this Window w)
 		{
-			int width;
-			int height;
-			
-			w.GetSize (out width, out height);
+			int width = w.Width;
+			int height = w.Height;
 			
 			w.InvalidateRect (new Rectangle (0, 0, width, height), true);
 		}
 		
 		public static Rectangle GetBounds (this Window w)
 		{
-			int width;
-			int height;
-			
-			w.GetSize (out width, out height);
+			int width = w.Width;
+			int height = w.Height;
 			
 			return new Rectangle (0, 0, width, height);
 		}
 
 		public static Size GetSize (this Window w)
 		{
-			int width;
-			int height;
-
-			w.GetSize (out width, out height);
+			int width = w.Width;
+			int height = w.Height;
 
 			return new Size (width, height);
 		}
