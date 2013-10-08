@@ -157,11 +157,11 @@ namespace Pinta.Gui.Widgets
 			return true;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		protected new void GetSizeRequest (out int height, out int width)
 		{
 			// Calculate desired size here.
-			requisition.Height = 50;
-			requisition.Width = 50;
+			height = 50;
+			width = 50;
 		}
 		#endregion
 		

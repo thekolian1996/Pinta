@@ -144,13 +144,13 @@ namespace Pinta.Gui.Widgets
 			return;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		protected new void GetSizeRequest (out int height, out int width)
 		{
 			// Always be X pixels tall, but maintain aspect ratio
 			Size imagesize = PintaCore.Workspace.ImageSize;
 			
-			requisition.Height = 65;
-			requisition.Width = (imagesize.Width * requisition.Height) / imagesize.Height;
+			height = 65;
+			width = (imagesize.Width * height) / imagesize.Height;
 			thumbnail = null;
 		}
 		#endregion

@@ -184,11 +184,11 @@ namespace Pinta.Gui.Widgets
 			return;
 		}
 
-		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
+		protected new void GetSizeRequest (out int height, out int width)
 		{
 			// Calculate desired size here.
-			requisition.Height = 305;
-			requisition.Width = 60;
+			height = 305;
+			width = 60;
 		}
 		
 		private int PointToPalette (int x, int y)
