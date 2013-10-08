@@ -56,7 +56,9 @@ namespace Pinta.Core
 			set
 			{
 				zoom_to_window_activated = value;
-				old_zoom_text = ZoomComboBox.ComboBox.ActiveText;
+				Gtk.TreeIter iter = new Gtk.TreeIter ();
+				PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveIter (out iter);
+				old_zoom_text = ZoomComboBox.ComboBox.Model.GetStringFromIter (iter);
 			}
 		}
 		
