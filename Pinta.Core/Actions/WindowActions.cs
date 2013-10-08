@@ -99,7 +99,8 @@ namespace Pinta.Core
 			OpenWindows.Remove (act);
             		act.Dispose ();
 
-			window_menu.HideAll ();
+		//FIXME: Just commented out for GTK3 without knowing consequences
+		//	window_menu.HideAll ();
 
 			// Remove all the menu items from the menu
 			foreach (var item in action_menu_items.Values) {

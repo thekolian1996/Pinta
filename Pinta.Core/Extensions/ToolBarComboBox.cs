@@ -36,18 +36,15 @@ namespace Pinta.Core
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
-			if (allowEntry)
-				ComboBox = new ComboBoxEntry (contents);
-			else {
+
 				Model = new ListStore (typeof(string), typeof (object));
 
 				if (contents != null)
 					foreach (string entry in contents)
 						Model.AppendValues (entry, null);
 
-				ComboBox = CreateComboBox ();
-				ComboBox.Model = Model;
-			}
+				ComboBox = ComboBox.NewWithModelAndEntry(Model);
+
 
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
@@ -59,11 +56,6 @@ namespace Pinta.Core
 			
 			Add (ComboBox);
 			Show ();
-		}
-
-		protected virtual ComboBox CreateComboBox ()
-		{
-			return ComboBox.NewText ();
 		}
 	}
 }

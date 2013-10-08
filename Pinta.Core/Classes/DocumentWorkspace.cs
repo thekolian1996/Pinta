@@ -241,7 +241,7 @@ namespace Pinta.Core
 			else
 				ratio = document.ImageSize.Height / rect.Height;
 			
-			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
+			(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBox).Entry.Text = String.Format ("{0:F}%", ratio * 100.0);
 			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
 			RecenterView (rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
 		}
@@ -254,8 +254,10 @@ namespace Pinta.Core
 				return; //Can't zoom in past a 1x1 px canvas
 
 			double zoom;
-			
-			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText, out zoom))
+
+			Gtk.TreeIter iter = new Gtk.TreeIter ();
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveIter (out iter);
+			if (!ViewActions.TryParsePercent (PintaCore.Actions.View.ZoomComboBox.ComboBox.Model.GetStringFromIter (iter), out zoom))
 				zoom = Scale * 100;
 			
 			zoom = Math.Min (zoom, 3600);
