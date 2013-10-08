@@ -82,9 +82,9 @@ namespace Pinta.Gui.Widgets
 		}
 
 		#region Protected Methods
-		protected override bool OnExposeEvent (EventExpose e)
+		public new void Draw (Cairo.Context cr)
 		{
-			base.OnExposeEvent (e);
+			base.Draw (cr);
 
 			if (!PintaCore.Workspace.HasOpenDocuments)
 				return true;
@@ -96,7 +96,7 @@ namespace Pinta.Gui.Widgets
 
 			// Translate our expose area for the whole drawingarea to just our canvas
 			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height);
-			canvas_bounds.Intersect (e.Area);
+			canvas_bounds.Intersect (cr);
 
 			if (canvas_bounds.IsEmpty)
 				return true;

@@ -120,9 +120,9 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Drawing Code
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
+		public new void Draw (Cairo.Context cr)
 		{
-			base.OnExposeEvent (ev);
+			base.Draw (cr);
 
 			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
 				Cairo.Rectangle ourRect = Rectangle.Inflate (GdkWindow.GetBounds (), -1, -1).ToCairoRectangle ();

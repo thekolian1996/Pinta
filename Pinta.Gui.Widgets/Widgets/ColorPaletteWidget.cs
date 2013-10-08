@@ -150,9 +150,10 @@ namespace Pinta.Gui.Widgets
 			return base.OnButtonPressEvent (ev);
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
+		public new void Draw (Cairo.Context cr)
 		{
-			base.OnExposeEvent (ev);
+
+			base.Draw (cr);
 			
 			using (Context g = Gdk.CairoHelper.Create (GdkWindow)) {
 				
@@ -180,7 +181,7 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 			
-			return true;
+			return;
 		}
 
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)

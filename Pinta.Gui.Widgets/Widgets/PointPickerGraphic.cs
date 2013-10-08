@@ -115,9 +115,9 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Drawing Code
-		protected override bool OnExposeEvent (Gdk.EventExpose ev)
+		public new void Draw (Cairo.Context cr)
 		{
-			base.OnExposeEvent (ev);
+			base.Draw (cr);
 			
 			if (thumbnail == null)
 				UpdateThumbnail ();
@@ -141,7 +141,7 @@ namespace Pinta.Gui.Widgets
 				//point
 				g.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
 			}
-			return true;
+			return;
 		}
 
 		protected override void OnSizeRequested (ref Gtk.Requisition requisition)
