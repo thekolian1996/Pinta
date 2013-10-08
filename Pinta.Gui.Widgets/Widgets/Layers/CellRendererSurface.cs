@@ -64,25 +64,23 @@ namespace Pinta.Gui.Widgets
 			set { surface = value; }
 		}
 
-		public override void GetSize (Widget widget, ref Gdk.Rectangle cellArea, out int x, out int y, out int width, out int height)
-		{
-			// TODO: Respect cell padding (Xpad and Ypad).
-			x = cellArea.Left;
-			y = cellArea.Top;
-			width = (int)cellArea.Width;
-			height = (int)cellArea.Height;
-		}
+//		public override void GetPreferredSize (Widget widget, Requisition minimum_size, Requisition natural_size)
+//		{
+//			// TODO: Respect cell padding (Xpad and Ypad).
+//			minimum_size.Height = natural_size.Height = (int)cellArea.Height;
+//			minimum_size.Width = natural_size.Width = (int)cellArea.Width;
+//		}
 
 		public new void Render (Cairo.Context window, Widget widget, Gdk.Rectangle backgroundArea, Gdk.Rectangle cellArea, Gdk.Rectangle exposeArea, CellRendererState flags)
 		{
 			int x, y, width, height;
 			
-			GetSize (widget, ref cellArea, out x, out y, out width, out height);
+//			GetSize (widget, ref cellArea, out x, out y, out width, out height);
 
 			using (var g = Gdk.CairoHelper.Create (window)) {
 				g.Save ();
 				g.Translate (x, y);
-				RenderCell (g, width, height);
+				RenderCell (g, cellArea.Width, cellArea.Height);
 				g.Restore ();
 			}
 		}
