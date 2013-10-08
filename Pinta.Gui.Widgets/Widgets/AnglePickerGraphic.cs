@@ -154,7 +154,7 @@ namespace Pinta.Gui.Widgets
 				g.DrawLine (center, endPoint, new Cairo.Color (.1, .1, .1), 1);
 			}
 			
-			return true;
+			return;
 		}
 
 		protected new void GetSizeRequest (out int height, out int width)

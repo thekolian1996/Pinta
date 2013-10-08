@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using Pinta.Core;
 
 namespace Pinta.Gui.Widgets
 {

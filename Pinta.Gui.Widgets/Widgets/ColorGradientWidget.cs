@@ -268,7 +268,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 		
-		private void HandleExposeEvent (object o)
+		private void HandleExposeEvent (object o, Gtk.DrawnArgs args)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
 				

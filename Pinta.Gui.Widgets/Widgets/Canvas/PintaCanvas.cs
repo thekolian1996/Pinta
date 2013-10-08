@@ -87,7 +87,7 @@ namespace Pinta.Gui.Widgets
 			base.Draw (cr);
 
 			if (!PintaCore.Workspace.HasOpenDocuments)
-				return true;
+				return;
 				
 			double scale = PintaCore.Workspace.Scale;
 
@@ -99,7 +99,7 @@ namespace Pinta.Gui.Widgets
 			canvas_bounds.Intersect (cr);
 
 			if (canvas_bounds.IsEmpty)
-				return true;
+				return;
 
 			canvas_bounds.X -= x;
 			canvas_bounds.Y -= y;
@@ -145,7 +145,7 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 
-			return true;
+			return;
 		}
 
 		protected override bool OnScrollEvent (EventScroll evnt)
