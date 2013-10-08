@@ -173,16 +173,20 @@ namespace Pinta.Core
 		
 		private void Entry_FocusInEvent (object o, Gtk.FocusInEventArgs args)
 		{
-			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new Gtk.TreeIter ();
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveIter (out iter);
+			temp_zoom = PintaCore.Actions.View.ZoomComboBox.ComboBox.Model.GetStringFromIter (iter);
 		}
 
 		private void ComboBox_FocusOutEvent (object o, Gtk.FocusOutEventArgs args)
 		{
-			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new Gtk.TreeIter ();
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveIter (out iter);
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.Model.GetStringFromIter (iter);
 			double percent;
 
 			if (!TryParsePercent (text, out percent)) {
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_zoom;
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBox).Entry.Text = temp_zoom;
 				return;
 			}
 			
@@ -211,7 +215,9 @@ namespace Pinta.Core
 
 		public void UpdateCanvasScale ()
 		{
-			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new Gtk.TreeIter ();
+			PintaCore.Actions.View.ZoomComboBox.ComboBox.GetActiveIter (out iter);
+			string text = PintaCore.Actions.View.ZoomComboBox.ComboBox.Model.GetStringFromIter (iter);
 
 			// stay in "Zoom to Window" mode if this function was called without the zoom level being changed by the user (e.g. if the 
 			// image was rotated or cropped) and "Zoom to Window" mode is active
