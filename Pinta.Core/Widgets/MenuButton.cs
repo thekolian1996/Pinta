@@ -136,8 +136,9 @@ namespace Hyena.Widgets
 			set { alignment.Visible = value; }
 		}
 
-		protected override void OnSizeRequested (ref Requisition requisition)
+		protected void OnSizeRequested (ref Requisition requisition)
 		{
+			//FIXME: This used to be override, don't knoiw what happens now that it isn't
 			requisition = size_widget.SizeRequest ();
 		}
 
