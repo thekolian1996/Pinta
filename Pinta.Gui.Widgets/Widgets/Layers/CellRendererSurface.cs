@@ -73,7 +73,7 @@ namespace Pinta.Gui.Widgets
 			height = (int)cellArea.Height;
 		}
 
-		protected override void Render (Gdk.Drawable window, Widget widget, Gdk.Rectangle backgroundArea, Gdk.Rectangle cellArea, Gdk.Rectangle exposeArea, CellRendererState flags)
+		protected override void Render (Cairo.Surface window, Widget widget, Gdk.Rectangle backgroundArea, Gdk.Rectangle cellArea, Gdk.Rectangle exposeArea, CellRendererState flags)
 		{
 			int x, y, width, height;
 			
