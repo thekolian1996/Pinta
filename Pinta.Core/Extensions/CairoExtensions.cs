@@ -373,13 +373,17 @@ namespace Pinta.Core
 			return dirty;
 		}
 
-		public static void FillRegion (this Context g, Gdk.Region region, Color color)
+		public static void FillRegion (this Context g, Cairo.Region region, Color color)
 		{
 			g.Save ();
 
 			g.Color = color;
 
-			foreach (Gdk.Rectangle r in region.GetRectangles ()) {
+			int numRects = region.NumRectangles;
+
+			for (int i = 0; i < numRects; i++) {
+				Cairo.Rectangle r = region.GetRectangle(i);
+
 				g.MoveTo (r.X, r.Y);
 				g.LineTo (r.X + r.Width, r.Y);
 				g.LineTo (r.X + r.Width, r.Y + r.Height);
