@@ -382,7 +382,7 @@ namespace Pinta.Core
 			int numRects = region.NumRectangles;
 
 			for (int i = 0; i < numRects; i++) {
-				Cairo.Rectangle r = region.GetRectangle(i);
+				Cairo.RectangleInt r = region.GetRectangle(i);
 
 				g.MoveTo (r.X, r.Y);
 				g.LineTo (r.X + r.Width, r.Y);
