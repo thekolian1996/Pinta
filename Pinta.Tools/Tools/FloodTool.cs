@@ -169,27 +169,31 @@ namespace Pinta.Tools
 		}
 
 		public unsafe static void FillStencilFromPoint (ImageSurface surface, IBitVector2D stencil, Point start, int tolerance, 
-		                                                out Rectangle boundingBox, Gdk.Region limitRegion, bool limitToSelection)
+		                                                out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			ColorBgra cmp = surface.GetColorBgraUnchecked (start.X, start.Y);
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Gdk.Rectangle[] scans;
+			Cairo.Rectangle[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+				using (Cairo.Region excluded = new Cairo.Rectangle (0, 0, stencil.Width, stencil.Height)) {
 					excluded.Xor (limitRegion);
-					scans = excluded.GetRectangles ();
+					int numRect = excluded.NumRectangles;
+					scans = new Cairo.Rectangle[numRect];
+					for (int i = 0; i < numRect; i++) {
+						scans[i] = excluded.GetRectangle (i);
+					}
 				}
 			} else {
-				scans = new Gdk.Rectangle[0];
+				scans = new Cairo.Rectangle[0];
 			}
 
-			foreach (Gdk.Rectangle rect in scans) {
+			foreach (Cairo.Rectangle rect in scans) {
 				stencil.Set (rect, true);
 			}
 
@@ -278,20 +282,24 @@ namespace Pinta.Tools
 		}
 
 		public unsafe static void FillStencilByColor (ImageSurface surface, IBitVector2D stencil, ColorBgra cmp, int tolerance, 
-		                                              out Rectangle boundingBox, Gdk.Region limitRegion, bool limitToSelection)
+		                                              out Rectangle boundingBox, Cairo.Region limitRegion, bool limitToSelection)
 		{
 			int top = int.MaxValue;
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Gdk.Rectangle[] scans;
+			Cairo.Rectangle[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Gdk.Region excluded = Gdk.Region.Rectangle (new Gdk.Rectangle (0, 0, stencil.Width, stencil.Height))) {
+				using (Cairo.Region excluded = new Cairo.Rectangle (0, 0, stencil.Width, stencil.Height)) {
 					excluded.Xor (limitRegion);
-					scans = excluded.GetRectangles ();
+					int numRect = excluded.NumRectangles;
+					scans = new Cairo.Rectangle[numRect];
+					for (int i = 0; i < numRect; i++) {
+						scans[i] = excluded.GetRectangle (i);
+					}
 				}
 			} else {
 				scans = new Gdk.Rectangle[0];

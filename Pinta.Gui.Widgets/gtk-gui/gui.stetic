@@ -5,6 +5,7 @@
     <target-gtk-version>3.0</target-gtk-version>
   </configuration>
   <import>
+    <widget-library name="../../bin/Pinta.Core.dll" />
     <widget-library name="../../bin/Pinta.Gui.Widgets.dll" internal="true" />
   </import>
   <widget class="Gtk.Bin" id="Pinta.Gui.Widgets.HistogramWidget" design-size="300 300">

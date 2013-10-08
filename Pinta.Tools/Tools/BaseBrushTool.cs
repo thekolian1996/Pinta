@@ -51,20 +51,22 @@ namespace Pinta.Tools
 				int width;
 				if (brush_width != null)
 				{
-					if (Int32.TryParse(brush_width.ComboBox.ActiveText, out width))
+					Gtk.TreeIter iter = new TreeIter ();
+					brush_width.ComboBox.GetActiveIter (out iter);
+					if (Int32.TryParse(brush_width.ComboBox.Model.GetStringFromIter (iter), out width))
 					{
 						if (width > 0)
 						{
-							(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString();
+							(brush_width.ComboBox as Gtk.ComboBox).Entry.Text = width.ToString();
 							return width;
 						}
 					}
 
-					(brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString();
+					(brush_width.ComboBox as Gtk.ComboBox).Entry.Text = DEFAULT_BRUSH_WIDTH.ToString();
 				}
 				return DEFAULT_BRUSH_WIDTH;
 			}
-			set { (brush_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
+			set { (brush_width.ComboBox as Gtk.ComboBox).Entry.Text = value.ToString (); }
 		}
 		
 		#region ToolBar
