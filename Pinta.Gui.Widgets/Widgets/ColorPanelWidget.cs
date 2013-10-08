@@ -43,7 +43,7 @@ namespace Pinta.Gui.Widgets
 		{
 			this.Build ();
 			
-			ExposeEvent += HandleExposeEvent;
+			Drawn += HandleExposeEvent;
 		}
 		
 		public void SetCairoColor (Color color)
@@ -51,7 +51,7 @@ namespace Pinta.Gui.Widgets
 			CairoColor = color;
 		}
 
-		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
+		private void HandleExposeEvent (object o)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
 				

@@ -64,7 +64,7 @@ namespace Pinta.Gui.Widgets
 			Histogram = new HistogramRgb ();
 			selected = new bool[] {true, true, true};
 			
-			ExposeEvent += HandleExposeEvent;
+			Drawn += HandleExposeEvent;
 		}
 		
 		public void ResetHistogram ()
@@ -167,7 +167,7 @@ namespace Pinta.Gui.Widgets
             }
         }
 
-		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
+		private void HandleExposeEvent (object o)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) 
 				DrawHistogram (g);

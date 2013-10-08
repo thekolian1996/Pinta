@@ -86,7 +86,7 @@ namespace Pinta.Gui.Widgets
 			eventbox.ButtonPressEvent += HandleButtonPressEvent;
 			eventbox.ButtonReleaseEvent += HandleButtonReleaseEvent;
 			
-			ExposeEvent += HandleExposeEvent;
+			Drawn += HandleExposeEvent;
 		}
 
 		public int GetValue (int i)
@@ -268,7 +268,7 @@ namespace Pinta.Gui.Widgets
 			}
 		}
 		
-		private void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
+		private void HandleExposeEvent (object o)
 		{
 			using (Context g = Gdk.CairoHelper.Create (this.GdkWindow)) {
 				
