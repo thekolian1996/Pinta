@@ -26,6 +26,7 @@
 
 using System;
 using Gdk;
+using Cairo;
 
 namespace Pinta.Resources
 {
@@ -63,20 +64,41 @@ namespace Pinta.Resources
 		// https://github.com/mono/monodevelop/blob/master/main/src/core/MonoDevelop.Ide/gtk-gui/generated.cs
 		private static Pixbuf CreateMissingImage (int size)
 		{
-			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
-			var gc = new Gdk.GC (pmap);
+			Cairo.Context image = Gdk.CairoHelper.Create (Gdk.Screen.Default.RootWindow);
+			Cairo.Surface surface =	image.GetTarget();
 
-			gc.RgbFgColor = new Gdk.Color (255, 255, 255);
-			pmap.DrawRectangle (gc, true, 0, 0, size, size);
-			gc.RgbFgColor = new Gdk.Color (0, 0, 0);
-			pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+			image.SetSourceColor(new Cairo.Color (255, 255, 255));
+			image.Rectangle (0, 0, size, size);
+			image.SetSourceColor(new Cairo.Color (0, 0, 0));
+			image.Rectangle (0, 0, (size - 1), (size - 1));
 
-			gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
-			gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-			pmap.DrawLine (gc, (size / 4), (size / 4), ((size - 1) - (size / 4)), ((size - 1) - (size / 4)));
-			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
+			
+			image.SetSourceColor(new Cairo.Color (255, 0, 0));
+			image.LineCap = LineCap.Round;
+			image.LineJoin = LineJoin.Round;
+			image.LineWidth = 3;
 
-			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+			//FIXME: Add  the lines as well!
+
+
+//			var pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, size, size);
+//			var gc = new Gdk.GC (pmap);
+//
+//			gc.RgbFgColor = new Gdk.Color (255, 255, 255);
+//			pmap.DrawRectangle (gc, true, 0, 0, size, size);
+//			gc.RgbFgColor = new Gdk.Color (0, 0, 0);
+//			pmap.DrawRectangle (gc, false, 0, 0, (size - 1), (size - 1));
+//
+//			gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
+//			gc.RgbFgColor = new Gdk.Color (255, 0, 0);
+//			pmap.DrawLine (gc, (size / 4), (size / 4), ((size - 1) - (size / 4)), ((size - 1) - (size / 4)));
+//			pmap.DrawLine (gc, ((size - 1) - (size / 4)), (size / 4), (size / 4), ((size - 1) - (size / 4)));
+
+//			return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, size, size);
+
+			surface.WriteToPng ("missing_icon");
+
+			return Gdk.Pixbuf.LoadFromResource ("missing_icon"); //FIXME MAJOR CRAP HACK
 		}
 
 		private static Gtk.IconSize GetIconSize(int size)
