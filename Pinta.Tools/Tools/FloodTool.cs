@@ -114,10 +114,18 @@ namespace Pinta.Tools
 				
 			base.OnMouseDown (canvas, args, point);
 
-			Gdk.Region currentRegion = Gdk.Region.Rectangle (doc.GetSelectedBounds (true));
+			//FIXME: Should move to extension
+			Gdk.Rectangle rect = doc.GetSelectedBounds (true);
+			Cairo.RectangleInt rectInt = new RectangleInt ();
+			rectInt.Height = rect.Height;
+			rectInt.Width = rect.Width;
+			rectInt.X = rect.X;
+			rectInt.Y = rect.Y;
+
+			Cairo.Region currentRegion = new Cairo.Region (rectInt);
 
 			// See if the mouse click is valid
-			if (!currentRegion.PointIn (pos.X, pos.Y) && limitToSelection) {
+			if (!currentRegion.ContainsPoint (pos.X, pos.Y) && limitToSelection) {
 				currentRegion.Dispose ();
 				currentRegion = null;
 				return;
@@ -176,25 +184,30 @@ namespace Pinta.Tools
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Cairo.Rectangle[] scans;
+			Cairo.RectangleInt[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Cairo.Region excluded = new Cairo.Rectangle (0, 0, stencil.Width, stencil.Height)) {
+				Cairo.RectangleInt rectInt = new Cairo.RectangleInt ();
+				rectInt.X = rectInt.Y = 0;
+				rectInt.Height = stencil.Height;
+				rectInt.Width = stencil.Width;
+
+				using (Cairo.Region excluded = new Cairo.Region (rectInt)) {
 					excluded.Xor (limitRegion);
 					int numRect = excluded.NumRectangles;
-					scans = new Cairo.Rectangle[numRect];
+					scans = new Cairo.RectangleInt[numRect];
 					for (int i = 0; i < numRect; i++) {
 						scans[i] = excluded.GetRectangle (i);
 					}
 				}
 			} else {
-				scans = new Cairo.Rectangle[0];
+				scans = new Cairo.RectangleInt[0];
 			}
 
-			foreach (Cairo.Rectangle rect in scans) {
-				stencil.Set (rect, true);
+			foreach (Cairo.RectangleInt rect in scans) {
+				stencil.Set (rect.X, rect.Y, true);
 			}
 
 			Queue<Point> queue = new Queue<Point> (16);
@@ -275,8 +288,8 @@ namespace Pinta.Tools
 				}
 			}
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, false);
+			foreach (Cairo.RectangleInt rect in scans)
+				stencil.Set (rect.X, rect.Y, false);
 			
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
@@ -288,25 +301,31 @@ namespace Pinta.Tools
 			int bottom = int.MinValue;
 			int left = int.MaxValue;
 			int right = int.MinValue;
-			Cairo.Rectangle[] scans;
+			Cairo.RectangleInt[] scans;
 
 			stencil.Clear (false);
 
 			if (limitToSelection) {
-				using (Cairo.Region excluded = new Cairo.Rectangle (0, 0, stencil.Width, stencil.Height)) {
+				Cairo.RectangleInt rectInt = new RectangleInt ();
+				rectInt.Height = stencil.Height;
+				rectInt.Width = stencil.Width;
+				rectInt.X = 0;
+				rectInt.Y = 0;
+
+				using (Cairo.Region excluded = new Cairo.Region(rectInt)) {
 					excluded.Xor (limitRegion);
 					int numRect = excluded.NumRectangles;
-					scans = new Cairo.Rectangle[numRect];
+					scans = new Cairo.RectangleInt[numRect];
 					for (int i = 0; i < numRect; i++) {
 						scans[i] = excluded.GetRectangle (i);
 					}
 				}
 			} else {
-				scans = new Gdk.Rectangle[0];
+				scans = new Cairo.RectangleInt[0];
 			}
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, true);
+			foreach (Cairo.RectangleInt rect in scans)
+				stencil.Set (rect.X, rect.Y, true);
 
             Parallel.For(0, surface.Height, y =>
             {
@@ -350,8 +369,8 @@ namespace Pinta.Tools
                 }
             });
 
-			foreach (Gdk.Rectangle rect in scans)
-				stencil.Set (rect, false);
+			foreach (Cairo.RectangleInt rect in scans)
+				stencil.Set (rect.X, rect.Y, false);
 
 			boundingBox = new Rectangle (left, top, right - left + 1, bottom - top + 1);
 		}
