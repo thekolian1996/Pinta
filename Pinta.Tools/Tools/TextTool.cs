@@ -164,8 +164,8 @@ namespace Pinta.Tools
 				size_combo = new ToolBarComboBox (65, 0, true);
 
 				size_combo.ComboBox.Changed += HandleSizeChanged;
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
+				(size_combo.ComboBox as Gtk.ComboBox).Entry.FocusOutEvent += new Gtk.FocusOutEventHandler (HandleFontSizeFocusOut);
+				(size_combo.ComboBox as Gtk.ComboBox).Entry.FocusInEvent += new Gtk.FocusInEventHandler (HandleFontSizeFocusIn);
 			}
 
 			tb.AppendItem (size_combo);
@@ -259,7 +259,7 @@ namespace Pinta.Tools
 				"10", "11", "12", "13", "14", "15", "20", "25", "30", "35",
 				"40", "45", "50", "55");
 
-				(outline_width.Child as ComboBoxEntry).Changed += HandleSizeChanged;
+				(outline_width.Child as ComboBox).Changed += HandleSizeChanged;
 			}
 
 			tb.AppendItem (outline_width);
@@ -287,16 +287,21 @@ namespace Pinta.Tools
 		private void HandleFontSizeFocusIn (object o, FocusInEventArgs args)
 		{
 			size_combo.ComboBox.Changed -= HandleSizeChanged;
-			temp_size = size_combo.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new TreeIter ();
+			size_combo.ComboBox.GetActiveIter (out iter);
+			temp_size = size_combo.ComboBox.Model.GetStringFromIter (iter);
 		}
 
 		private void HandleFontSizeFocusOut (object o, FocusOutEventArgs args)
 		{
-			string text = size_combo.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new TreeIter ();
+			size_combo.ComboBox.GetActiveIter (out iter);
+
+			string text = size_combo.ComboBox.Model.GetStringFromIter (iter);
 			int size;
 
 			if (!int.TryParse (text, out size)) {
-				(size_combo.ComboBox as Gtk.ComboBoxEntry).Entry.Text = temp_size;
+				(size_combo.ComboBox as Gtk.ComboBox).Entry.Text = temp_size;
 				return;
 			}
 			
@@ -317,15 +322,19 @@ namespace Pinta.Tools
 
 		private void UpdateFontSizes ()
 		{
-			string oldval = size_combo.ComboBox.ActiveText;
+			Gtk.TreeIter iter = new TreeIter ();
+			size_combo.ComboBox.GetActiveIter (out iter);
+
+			string oldval = size_combo.ComboBox.Model.GetStringFromIter (iter);
 
 			ListStore model = (ListStore)size_combo.ComboBox.Model;
 			model.Clear ();
 
 			List<int> sizes = PintaCore.System.Fonts.GetSizes (FontFamily);
 
+			//FIXME: Not sure if this is right
 			foreach (int i in sizes)
-				size_combo.ComboBox.AppendText (i.ToString ());
+				size_combo.ComboBox.Add (new Entry (i.ToString ()));
 			
 			int index;
 			
@@ -348,12 +357,20 @@ namespace Pinta.Tools
 		}
 
 		private Pango.FontFamily FontFamily {
-			get { return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.ActiveText); }
+			get { 
+				Gtk.TreeIter iter = new TreeIter ();
+				font_combo.ComboBox.GetActiveIter (out iter);
+				return PintaCore.System.Fonts.GetFamily (font_combo.ComboBox.Model.GetStringFromIter (iter)); 
+			}
 		}
 
 
 		private int FontSize {
-			get { return int.Parse (size_combo.ComboBox.ActiveText); }
+			get { 
+				Gtk.TreeIter iter = new TreeIter ();
+				size_combo.ComboBox.GetActiveIter (out iter);
+				return int.Parse (size_combo.ComboBox.Model.GetStringFromIter (iter)); 
+			}
 		}
 
 		private TextAlignment Alignment {
@@ -368,7 +385,11 @@ namespace Pinta.Tools
 		}
 
 		private string Font {
-			get { return font_combo.ComboBox.ActiveText; }
+			get { 
+				Gtk.TreeIter iter = new TreeIter ();
+				font_combo.ComboBox.GetActiveIter (out iter);
+				return font_combo.ComboBox.Model.GetStringFromIter (iter);
+			}
 		}
 
 		private void HandlePintaCorePalettePrimaryColorChanged (object sender, EventArgs e)
@@ -458,16 +479,19 @@ namespace Pinta.Tools
 		protected int OutlineWidth {
 			get {
 				int width;
-				if (Int32.TryParse (outline_width.ComboBox.ActiveText, out width)) {
+				Gtk.TreeIter iter = new TreeIter ();
+				outline_width.ComboBox.GetActiveIter (out iter);
+
+				if (Int32.TryParse (outline_width.ComboBox.Model.GetStringFromIter (iter), out width)) {
 					if (width > 0) {
-						(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = width.ToString ();
+						(outline_width.ComboBox as Gtk.ComboBox).Entry.Text = width.ToString ();
 						return width;
 					}
 				}
-				(outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = "2";
+				(outline_width.ComboBox as Gtk.ComboBox).Entry.Text = "2";
 				return 2;
 			}
-			set { (outline_width.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }
+			set { (outline_width.ComboBox as Gtk.ComboBox).Entry.Text = value.ToString (); }
 		}
 
 		protected bool StrokeText { get { return ((int)fill_button.SelectedItem.Tag >= 1 && (int)fill_button.SelectedItem.Tag != 3); } }

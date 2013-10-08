@@ -58,20 +58,23 @@ namespace Pinta.Tools
 		public double Radius {
 			get {
 				double rad;
-				if (Double.TryParse (radius.ComboBox.ActiveText, out rad))
+				Gtk.TreeIter iter = new Gtk.TreeIter ();
+				radius.ComboBox.GetActiveIter (out iter);
+
+				if (Double.TryParse (radius.ComboBox.Model.GetStringFromIter (iter), out rad))
 					if (rad >= 0) {
-						(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = rad.ToString ();
+						(radius.ComboBox as Gtk.ComboBox).Entry.Text = rad.ToString ();
 						return rad;
 					} else {
-						(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString ();
+						(radius.ComboBox as Gtk.ComboBox).Entry.Text = BrushWidth.ToString ();
 						return BrushWidth;
 					}
 				else {
-					(radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = BrushWidth.ToString ();
+					(radius.ComboBox as Gtk.ComboBox).Entry.Text = BrushWidth.ToString ();
 					return BrushWidth;
 				}
 			}
-			set { (radius.ComboBox as Gtk.ComboBoxEntry).Entry.Text = value.ToString (); }			
+			set { (radius.ComboBox as Gtk.ComboBox).Entry.Text = value.ToString (); }			
 		}
 		
 		protected override void BuildToolBar (Gtk.Toolbar tb)
