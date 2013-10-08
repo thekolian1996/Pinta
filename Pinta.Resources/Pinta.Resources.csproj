@@ -51,11 +51,19 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-3.0</Package>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-3.0</Package>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-3.0</Package>
+    </Reference>
+    <Reference Include="glib-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glib-sharp-3.0</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourceManager.cs" />
@@ -80,19 +88,19 @@
     <EmbeddedResource Include="Resources\Tools.Text.png">
       <LogicalName>Tools.Text.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Pan.png">
+    <EmbeddedResource Include="Resources\Cursor.Pan.png">
       <LogicalName>Cursor.Pan.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
+    <EmbeddedResource Include="Resources\Cursor.Paintbrush.png">
       <LogicalName>Cursor.Paintbrush.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.ColorPicker.png">
       <LogicalName>Cursor.ColorPicker.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.MagicWand.png">
+    <EmbeddedResource Include="Resources\Cursor.MagicWand.png">
       <LogicalName>Cursor.MagicWand.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Gradient.png">
+    <EmbeddedResource Include="Resources\Cursor.Gradient.png">
       <LogicalName>Cursor.Gradient.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Text.png">
@@ -107,7 +115,7 @@
     <EmbeddedResource Include="Resources\Tools.LassoSelect.png">
       <LogicalName>Tools.LassoSelect.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.RectangleSelect.png">
+    <EmbeddedResource Include="Resources\Cursor.RectangleSelect.png">
       <LogicalName>Cursor.RectangleSelect.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.LassoSelect.png">
@@ -116,7 +124,7 @@
     <EmbeddedResource Include="Resources\Cursor.EllipseSelect.png">
       <LogicalName>Cursor.EllipseSelect.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Eraser.png">
+    <EmbeddedResource Include="Resources\Cursor.Eraser.png">
       <LogicalName>Cursor.Eraser.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.Rectangle.png">
@@ -125,7 +133,7 @@
     <EmbeddedResource Include="Resources\Cursor.RoundedRectangle.png">
       <LogicalName>Cursor.RoundedRectangle.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\Cursor.Ellipse.png">
+    <EmbeddedResource Include="Resources\Cursor.Ellipse.png">
       <LogicalName>Cursor.Ellipse.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Cursor.FreeformShape.png">
@@ -200,7 +208,7 @@
     <EmbeddedResource Include="Resources\ColorPalette.SwapIcon.png">
       <LogicalName>ColorPalette.SwapIcon.png</LogicalName>
     </EmbeddedResource>
-	<EmbeddedResource Include="Resources\ColorPalette.ResetIcon.png">
+    <EmbeddedResource Include="Resources\ColorPalette.ResetIcon.png">
       <LogicalName>ColorPalette.ResetIcon.png</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Tools.Paintbrush.png">
