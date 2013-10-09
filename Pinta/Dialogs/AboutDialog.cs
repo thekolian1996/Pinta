@@ -178,7 +178,9 @@ namespace Pinta
 			//} else
 				++scroll;
 			int w, h;
-			this.GdkWindow.GetSize (out w, out h);
+//			this.GdkWindow.GetSize (out w, out h);
+			w = GdkWindow.FrameExtents.Width;
+			h = GdkWindow.FrameExtents.Height;
 			this.QueueDrawArea (0, 0, w, image.Height);
 			return true;
 		}
@@ -187,7 +189,9 @@ namespace Pinta
 		{
 			if (image != null) {
 				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
+//				this.GdkWindow.GetSize (out w, out h);
+				w = GdkWindow.FrameExtents.Width;
+				h = GdkWindow.FrameExtents.Height;
 				this.GdkWindow.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
 				0);
 			}
@@ -197,7 +201,9 @@ namespace Pinta
 		{
 			if (image_top != null) {
 				int w, h;
-				this.GdkWindow.GetSize (out w, out h);
+//				this.GdkWindow.GetSize (out w, out h);
+				w = GdkWindow.FrameExtents.Width;
+				h = GdkWindow.FrameExtents.Height;
 				this.GdkWindow.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
 				0);
 			}
@@ -206,7 +212,9 @@ namespace Pinta
 		private void DrawText ()
 		{
 			int width, height;
-			GdkWindow.GetSize (out width, out height);
+//			GdkWindow.GetSize (out width, out height);
+			width = GdkWindow.FrameExtents.Width;
+			height = GdkWindow.FrameExtents.Height;
 
 			int widthPixel, heightPixel;
 			layout.GetPixelSize (out widthPixel, out heightPixel);
@@ -226,7 +234,9 @@ namespace Pinta
 		{
 			int w, h;
 
-			this.GdkWindow.GetSize (out w, out h);
+//			this.GdkWindow.GetSize (out w, out h);
+			w = GdkWindow.FrameExtents.Width;
+			h = GdkWindow.FrameExtents.Height;
 			this.DrawImage ();
 			this.DrawText ();
 			this.DrawImageTop ();
@@ -239,7 +249,9 @@ namespace Pinta
 			int x, y;
 			int w, h;
 			GdkWindow.GetOrigin (out x, out y);
-			GdkWindow.GetSize (out w, out h);
+//			GdkWindow.GetSize (out w, out h);
+			w = GdkWindow.FrameExtents.Width;
+			h = GdkWindow.FrameExtents.Height;
 
 			textTop = y + image.Height - 30;
 			scrollStart = -(image.Height - textTop);
