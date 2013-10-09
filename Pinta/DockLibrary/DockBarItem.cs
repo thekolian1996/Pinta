@@ -152,14 +152,14 @@ namespace MonoDevelop.Components.Docking
 			AutoHide (false);
 		}
 
-		public new void Draw (Cairo.Context cr)
+		public new void Draw (Cairo.Context ctx)
 		{
 			if (State == StateType.Prelight) {
 				int w = Allocation.Width, h = Allocation.Height;
 				double x=Allocation.Left, y=Allocation.Top, r=3;
 				x += 0.5; y += 0.5; h -=1; w -= 1;
 				
-				using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
+//				using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
 					HslColor c = new HslColor (Style.Background (Gtk.StateType.Normal));
 					HslColor c1 = c;
 					HslColor c2 = c;
@@ -207,10 +207,10 @@ namespace MonoDevelop.Components.Docking
 					ctx.LineWidth = 1;
 					ctx.Color = c1;
 					ctx.Stroke ();
-				}
+//				}
 			}
 		
-			base.Draw (cr);
+			base.Draw (ctx);
 			return;
 		}
 
