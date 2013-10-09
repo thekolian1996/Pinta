@@ -150,7 +150,7 @@ namespace Pinta
 			DefaultWidth = 349;
 			DefaultHeight = 224;
 			BorderWidth = 6;
-			VBox.Spacing = 10;
+			ContentArea.Spacing = 10;
 			
 			// Layer name
 			var box1 = new HBox ();
@@ -159,17 +159,17 @@ namespace Pinta
 			box1.PackStart (new Label (Mono.Unix.Catalog.GetString ("Name:")), false, false, 0);
 
 			layerNameEntry = new Entry ();
-			box1.PackStart (layerNameEntry);
+			box1.PackStart (layerNameEntry, false, false, 0);
 
-			VBox.PackStart (box1, false, false, 0);
+			ContentArea.PackStart (box1, false, false, 0);
 
 			// Visible checkbox
 			visibilityCheckbox = new CheckButton (Mono.Unix.Catalog.GetString ("Visible"));
 
-			VBox.PackStart (visibilityCheckbox, false, false, 0);
+			ContentArea.PackStart (visibilityCheckbox, false, false, 0);
 
 			// Horizontal separator
-			VBox.PackStart (new HSeparator (), false, false, 0);
+			ContentArea.PackStart (new HSeparator (), false, false, 0);
 
 			// Blend mode
 			var box2 = new HBox ();
@@ -178,9 +178,9 @@ namespace Pinta
 			box2.PackStart (new Label (Mono.Unix.Catalog.GetString ("Blend Mode") + ":"), false, false, 0);
 
 			blendComboBox = new ComboBox (UserBlendOps.GetAllBlendModeNames ().ToArray ());
-			box2.PackStart (blendComboBox);
+			box2.PackStart (blendComboBox, false, false, 0);
 
-			VBox.PackStart (box2, false, false, 0);
+			ContentArea.PackStart (box2, false, false, 0);
 
 			// Opacity
 			var box3 = new HBox ();
@@ -199,10 +199,10 @@ namespace Pinta
 			opacitySlider.Adjustment.PageIncrement = 10;
 			box3.PackStart (opacitySlider, true, true, 0);
 
-			VBox.PackStart (box3, false, false, 0);
+			ContentArea.PackStart (box3, false, false, 0);
 
 			// Finish up
-			VBox.ShowAll ();
+			ContentArea.ShowAll ();
 
 			AlternativeButtonOrder = new int[] { (int)ResponseType.Ok, (int)ResponseType.Cancel };
 			DefaultResponse = ResponseType.Ok;

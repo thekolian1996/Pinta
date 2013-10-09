@@ -88,7 +88,7 @@ namespace Pinta
 			workspace_layout = new HBox ();
 			workspace_layout.Name = "workspace_layout";
 
-			shell_layout.PackStart (workspace_layout);
+			shell_layout.PackStart (workspace_layout, false, false, 0);
 			workspace_layout.ShowAll ();
 
 			return workspace_layout;

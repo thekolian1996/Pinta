@@ -27,7 +27,7 @@ namespace Pinta
 			this.Title = global::Mono.Unix.Catalog.GetString ("New Image");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child Pinta.NewImageDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -167,7 +167,7 @@ namespace Pinta
 			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(w1 [this.table1]));
 			w13.Position = 1;
 			// Internal child Pinta.NewImageDialog.ActionArea
-			global::Gtk.HButtonBox w14 = this.ActionArea;
+			global::Gtk.HButtonBox w14 = (Gtk.HButtonBox) this.ActionArea;
 			w14.Name = "dialog1_ActionArea";
 			w14.Spacing = 10;
 			w14.BorderWidth = ((uint)(5));

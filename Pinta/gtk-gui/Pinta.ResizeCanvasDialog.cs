@@ -509,7 +509,7 @@ namespace Pinta
 			w104.Expand = false;
 			w104.Fill = false;
 			// Internal child Pinta.ResizeCanvasDialog.ActionArea
-			global::Gtk.HButtonBox w105 = this.ActionArea;
+			global::Gtk.HButtonBox w105 = (Gtk.HButtonBox) this.ActionArea;
 			w105.Name = "dialog1_ActionArea";
 			w105.Spacing = 10;
 			w105.BorderWidth = ((uint)(5));

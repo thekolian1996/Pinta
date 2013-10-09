@@ -277,21 +277,21 @@ namespace Pinta
 //			HasSeparator = false;
 			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 
-			VBox.BorderWidth = 0;
+			ContentArea.BorderWidth = 0;
 
 			aboutPictureScrollBox = new ScrollBox ();
 
-			VBox.PackStart (aboutPictureScrollBox, false, false, 0);
+			ContentArea.PackStart (aboutPictureScrollBox, false, false, 0);
 			imageSep = PintaCore.Resources.GetIcon ("About.ImageSep.png");
 
-			VBox.PackStart (new Gtk.Image (imageSep), false, false, 0);
+			ContentArea.PackStart (new Gtk.Image (imageSep), false, false, 0);
 
 			Notebook notebook = new Notebook ();
 			notebook.BorderWidth = 6;
 			notebook.AppendPage (new AboutPintaTabPage (), new Label (Title));
 			notebook.AppendPage (new VersionInformationTabPage (), new Label (Catalog.GetString ("Version Info")));
 			
-			VBox.PackStart (notebook, true, true, 4);
+			ContentArea.PackStart (notebook, true, true, 4);
 
 			AddButton (Gtk.Stock.Close, (int)ResponseType.Close);
 

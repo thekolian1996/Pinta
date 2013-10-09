@@ -34,7 +34,7 @@ namespace Pinta
 			this.DefaultWidth = 300;
 			this.DefaultHeight = 200;
 			// Internal child Pinta.ResizeImageDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -203,7 +203,7 @@ namespace Pinta
 			w17.Expand = false;
 			w17.Fill = false;
 			// Internal child Pinta.ResizeImageDialog.ActionArea
-			global::Gtk.HButtonBox w18 = this.ActionArea;
+			global::Gtk.HButtonBox w18 = (Gtk.HButtonBox) this.ActionArea;
 			w18.Name = "dialog1_ActionArea";
 			w18.Spacing = 10;
 			w18.BorderWidth = ((uint)(5));

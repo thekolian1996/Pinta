@@ -15,7 +15,7 @@ namespace Pinta
 			this.Name = "Pinta.ProgressDialog";
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			// Internal child Pinta.ProgressDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
@@ -36,7 +36,7 @@ namespace Pinta
 			w3.Expand = false;
 			w3.Fill = false;
 			// Internal child Pinta.ProgressDialog.ActionArea
-			global::Gtk.HButtonBox w4 = this.ActionArea;
+			global::Gtk.HButtonBox w4 = (Gtk.HButtonBox) this.ActionArea;
 			w4.Name = "dialog1_ActionArea";
 			w4.Spacing = 10;
 			w4.BorderWidth = ((uint)(5));
