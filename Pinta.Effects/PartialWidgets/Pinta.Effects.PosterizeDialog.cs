@@ -21,7 +21,7 @@ namespace Pinta.Effects
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.Resizable = false;
 			// Internal child Pinta.Effects.PosterizeDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.WidthRequest = 400;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -96,7 +96,7 @@ namespace Pinta.Effects
 			w6.Expand = false;
 			w6.Fill = false;
 			// Internal child Pinta.Effects.PosterizeDialog.ActionArea
-			global::Gtk.HButtonBox w7 = this.ActionArea;
+			global::Gtk.HButtonBox w7 = (Gtk.HButtonBox) this.ActionArea;
 			w7.Name = "dialog1_ActionArea";
 			w7.Spacing = 10;
 			w7.BorderWidth = ((uint)(5));

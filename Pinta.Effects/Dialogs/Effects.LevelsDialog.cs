@@ -58,9 +58,9 @@ namespace Pinta.Effects
 			EffectData = effectData;			
 			mask = new bool[] {true, true, true};
 
-			this.HasSeparator = false;
+//			this.HasSeparator = false;
 			//hack allowing adding hbox with rgb checkboxes into dialog action area
-			VBox.Remove (hboxBottom);
+			ContentArea.Remove (hboxBottom);
 			foreach (Widget widget in hboxBottom)
 			{
 				hboxBottom.Remove (widget);

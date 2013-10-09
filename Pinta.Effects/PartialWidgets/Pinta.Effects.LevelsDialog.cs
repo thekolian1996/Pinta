@@ -60,10 +60,10 @@ namespace Pinta.Effects
 			this.TypeHint = ((global::Gdk.WindowTypeHint)(1));
 			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 			this.Resizable = false;
-			this.AllowGrow = false;
+//			this.AllowGrow = false;
 			this.SkipTaskbarHint = true;
 			// Internal child Pinta.Effects.LevelsDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Events = ((global::Gdk.EventMask)(1534));
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
@@ -212,7 +212,7 @@ namespace Pinta.Effects
 			this.gradientInput.WidthRequest = 40;
 			this.gradientInput.CanFocus = true;
 			this.gradientInput.Events = ((global::Gdk.EventMask)(510));
-			this.gradientInput.ExtensionEvents = ((global::Gdk.ExtensionMode)(1));
+//			this.gradientInput.ExtensionEvents = ((global::Gdk.ExtensionMode)(1));
 			this.gradientInput.Name = "gradientInput";
 			this.gradientInput.Count = 2;
 			this.hbox8.Add (this.gradientInput);
@@ -496,7 +496,7 @@ namespace Pinta.Effects
 			w45.Expand = false;
 			w45.Fill = false;
 			// Internal child Pinta.Effects.LevelsDialog.ActionArea
-			global::Gtk.HButtonBox w46 = this.ActionArea;
+			global::Gtk.HButtonBox w46 = (Gtk.HButtonBox) this.ActionArea;
 			w46.Name = "__gtksharp_58_Stetic_TopLevelDialog_ActionArea";
 			w46.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child __gtksharp_58_Stetic_TopLevelDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild

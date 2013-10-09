@@ -93,7 +93,7 @@ namespace Pinta.Effects
 			checkRed.Toggled += HandleCheckToggled;
 			checkGreen.Toggled += HandleCheckToggled;
 			checkBlue.Toggled += HandleCheckToggled;
-			drawing.ExposeEvent += HandleDrawingExposeEvent;
+			drawing.Drawn += HandleDrawingExposeEvent;
 			drawing.MotionNotifyEvent += HandleDrawingMotionNotifyEvent;
 			drawing.LeaveNotifyEvent += HandleDrawingLeaveNotifyEvent;
 			drawing.ButtonPressEvent += HandleDrawingButtonPressEvent;
