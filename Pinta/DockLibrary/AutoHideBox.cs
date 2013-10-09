@@ -104,11 +104,11 @@ namespace MonoDevelop.Components.Docking
 			item.Widget.Show ();
 			scrollable.Add (item.Widget);
 			fr.PackStart (scrollable, true, true, 0);
-			
+
 			sepBox.ButtonPressEvent += OnSizeButtonPress;
 			sepBox.ButtonReleaseEvent += OnSizeButtonRelease;
 			sepBox.MotionNotifyEvent += OnSizeMotion;
-			sepBox.ExposeEvent += OnGripExpose;
+			sepBox.Drawn += OnGripExpose;
 			sepBox.EnterNotifyEvent += delegate { insideGrip = true; sepBox.QueueDraw (); };
 			sepBox.LeaveNotifyEvent += delegate { insideGrip = false; sepBox.QueueDraw (); };
 		}

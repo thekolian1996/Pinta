@@ -441,7 +441,7 @@ namespace Pinta
 
 				PintaCore.Workspace.Scale = ratio;
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBoxEntry).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as ComboBox).Entry.Text = string.Format ("{0}%", (int)(PintaCore.Workspace.Scale * 100));
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 			}
 
@@ -454,7 +454,7 @@ namespace Pinta
 				int zoom = (int)(PintaCore.Workspace.ActiveWorkspace.Scale * 100);
 			
 				PintaCore.Actions.View.SuspendZoomUpdate ();
-				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBoxEntry).Entry.Text = string.Format ("{0}%", zoom);
+				(PintaCore.Actions.View.ZoomComboBox.ComboBox as Gtk.ComboBox).Entry.Text = string.Format ("{0}%", zoom);
 				PintaCore.Actions.View.ResumeZoomUpdate ();
 
 				PintaCore.Workspace.OnCanvasSizeChanged ();
