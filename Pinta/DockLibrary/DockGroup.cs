@@ -779,7 +779,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public void Draw (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex)
+		public void Draw (Cairo.Context exposedArea, DockGroup currentHandleGrp, int currentHandleIndex)
 		{
 			if (type != DockGroupType.Tabbed) {
 				DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, false, false, null);
@@ -791,12 +791,12 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, bool invalidateOnly, List<Gdk.Rectangle> areasList)
+		public void DrawSeparators (Cairo.Context exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, bool invalidateOnly, List<Gdk.Rectangle> areasList)
 		{
 			DrawSeparators (exposedArea, currentHandleGrp, currentHandleIndex, invalidateOnly, true, areasList);
 		}
 		
-		void DrawSeparators (Gdk.Rectangle exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, bool invalidateOnly, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
+		void DrawSeparators (Cairo.Context exposedArea, DockGroup currentHandleGrp, int currentHandleIndex, bool invalidateOnly, bool drawChildrenSep, List<Gdk.Rectangle> areasList)
 		{
 			if (type == DockGroupType.Tabbed || VisibleObjects.Count == 0)
 				return;
