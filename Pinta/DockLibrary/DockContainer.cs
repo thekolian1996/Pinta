@@ -330,7 +330,7 @@ namespace MonoDevelop.Components.Docking
 		
 		protected override void OnRealized ()
 		{
-			WidgetFlags |= WidgetFlags.Realized;
+//			WidgetFlags |= WidgetFlags.Realized;
 			
 			Gdk.WindowAttr attributes = new Gdk.WindowAttr ();
 			attributes.X = Allocation.X;
@@ -338,9 +338,9 @@ namespace MonoDevelop.Components.Docking
 			attributes.Height = Allocation.Height;
 			attributes.Width = Allocation.Width;
 			attributes.WindowType = Gdk.WindowType.Child;
-			attributes.Wclass = Gdk.WindowClass.InputOutput;
+//			attributes.Wclass = Gdk.WindowClass.InputOutput;
 			attributes.Visual = Visual;
-			attributes.Colormap = Colormap;
+//			attributes.Colormap = Colormap;
 			attributes.EventMask = (int)(Events |
 				Gdk.EventMask.ExposureMask |
 				Gdk.EventMask.Button1MotionMask |
@@ -350,7 +350,7 @@ namespace MonoDevelop.Components.Docking
 			Gdk.WindowAttributesType attributes_mask =
 				Gdk.WindowAttributesType.X |
 				Gdk.WindowAttributesType.Y |
-				Gdk.WindowAttributesType.Colormap |
+//				Gdk.WindowAttributesType.Colormap |
 				Gdk.WindowAttributesType.Visual;
 			GdkWindow = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
 			GdkWindow.UserData = Handle;
