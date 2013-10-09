@@ -45,7 +45,7 @@ namespace Pinta.Gui.Widgets
 			w3.Expand = false;
 			w3.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.combobox = global::Gtk.ComboBox.NewText ();
+			this.combobox = global::Gtk.ComboBox.NewWithEntry ();
 			this.combobox.Name = "combobox";
 			this.vbox2.Add (this.combobox);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.combobox]));

@@ -94,27 +94,29 @@ namespace Pinta.Gui.Widgets
 			int x = (int)PintaCore.Workspace.Offset.X;
 			int y = (int)PintaCore.Workspace.Offset.Y;
 
+
 			// Translate our expose area for the whole drawingarea to just our canvas
-			Rectangle canvas_bounds = new Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height);
-			canvas_bounds.Intersect (cr);
+			Cairo.RectangleInt rect = new Cairo.RectangleInt () {X = x, Y = y, Width = PintaCore.Workspace.CanvasSize.Width, Height = PintaCore.Workspace.CanvasSize.Height};
+//			Cairo.Region canvas_bounds = new Cairo.Region (rect);
+//			canvas_bounds.Intersect (cr);
+//
+//			if (canvas_bounds.IsEmpty)
+//				return;
 
-			if (canvas_bounds.IsEmpty)
-				return;
-
-			canvas_bounds.X -= x;
-			canvas_bounds.Y -= y;
+			rect.X -= x;
+			rect.Y -= y;
 
 			// Resize our offscreen surface to a surface the size of our drawing area
-			if (canvas == null || canvas.Width != canvas_bounds.Width || canvas.Height != canvas_bounds.Height) {
+			if (canvas == null || canvas.Width != rect.Width || canvas.Height != rect.Height) {
 				if (canvas != null)
 					(canvas as IDisposable).Dispose ();
 
-				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, canvas_bounds.Width, canvas_bounds.Height);
+				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, rect.Width, rect.Height);
 			}
 
-			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
+//			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
+			using (Cairo.Context g = cr) {
 				// Draw our canvas drop shadow
 				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 2, PintaCore.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
 				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 4, PintaCore.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
@@ -131,10 +133,10 @@ namespace Pinta.Gui.Widgets
 				if (layers.Count == 0) {
 					canvas.Clear ();
 				}
-				cr.Render (layers, canvas, canvas_bounds.Location);
+//				cr.Render (layers, canvas, canvas_bounds.Location);
 
 				// Paint the surface to our canvas
-				g.SetSourceSurface (canvas, canvas_bounds.X + (int)(0 * scale), canvas_bounds.Y + (int)(0 * scale));
+				g.SetSourceSurface (canvas, rect.X + (int)(0 * scale), rect.Y + (int)(0 * scale));
 				g.Paint ();
 
 				// Selection outline
@@ -171,10 +173,11 @@ namespace Pinta.Gui.Widgets
 		#region Private Methods
 		private void SetRequisition (Size size)
 		{
-			Requisition req = new Requisition ();
-			req.Width = size.Width;
-			req.Height = size.Height;
-			Requisition = req;
+//			Requisition req = new Requisition ();
+//			req.Width = size.Width;
+//			req.Height = size.Height;
+//			this.Requisition = req;
+			SetSizeRequest (size.Width, size.Height);
 
 			QueueResize ();
 		}
