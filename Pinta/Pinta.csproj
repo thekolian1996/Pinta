@@ -166,6 +166,7 @@
     <Compile Include="DockLibrary\PlaceholderWindow.cs" />
     <Compile Include="DockLibrary\ShadedContainer.cs" />
     <Compile Include="DockLibrary\TabStrip.cs" />
+    <Compile Include="Extensions\GtkExtensions.cs" />
     <Compile Include="Pads\ColorPalettePad.cs" />
     <Compile Include="Pads\CanvasPad.cs" />
     <Compile Include="Pads\HistoryPad.cs" />
