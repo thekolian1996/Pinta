@@ -257,14 +257,16 @@ namespace MonoDevelop.Components.Docking
 				st = StateType.Active;
 
 			if (DockFrame.IsWindows) {
-				GdkWindow.DrawRectangle (Style.DarkGC (Gtk.StateType.Normal), false, rect);
+//				GdkWindow.DrawRectangle (Style.DarkGC (Gtk.StateType.Normal), false, rect);
+				cr0.Rectangle (rect);
 				rect.X++;
 				rect.Width--;
 				if (tab.Active) {
-					GdkWindow.DrawRectangle (Style.LightGC (Gtk.StateType.Normal), true, rect);
+//					GdkWindow.DrawRectangle (Style.LightGC (Gtk.StateType.Normal), true, rect);
+					cr0.Rectangle (rect);
 				}
 				else {
-					using (Cairo.Context cr = Gdk.CairoHelper.Create (evnt.Window)) {
+					using (Cairo.Context cr = cr0) {
 						cr.NewPath ();
 						cr.MoveTo (rect.X, rect.Y);
 						cr.RelLineTo (rect.Width, 0);
