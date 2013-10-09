@@ -438,7 +438,7 @@ namespace MonoDevelop.Components.Docking
 		public IEnumerable<Rectangle> GetShadedAreas ()
 		{
 			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
-			if (layout != null)
+			if (layout != null && this.GdkWindow != null)
 				//USed to be allocation
 				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, rects);
 			return rects;
