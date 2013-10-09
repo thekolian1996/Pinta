@@ -49,7 +49,7 @@ namespace Pinta
 			this.DefaultWidth = 300;
 			this.DefaultHeight = 200;
 			// Internal child Pinta.ResizeCanvasDialog.VBox
-			global::Gtk.VBox w1 = this.VBox;
+			global::Gtk.Box w1 = this.ContentArea;
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
