@@ -832,11 +832,13 @@ namespace MonoDevelop.Components.Docking
 							Frame.ShadedContainer.DrawBackground (Frame.Container, new Gdk.Rectangle (x, y, hw, hh));
 						} else {
 							StateType state = (currentHandleGrp == this && currentHandleIndex == n) ? StateType.Prelight : StateType.Normal;
-							if (!DockFrame.IsWindows)
-								Gtk.Style.PaintHandle (Frame.Style, Frame.Container.GdkWindow, state, ShadowType.None, exposedArea, Frame, "paned", x, y, hw, hh, or);
+							if (!DockFrame.IsWindows) {
+								Cairo.Context cr = new Cairo.Context (Frame.Container.GdkWindow.CreateSimilarSurface (0, Frame.Container.GdkWindow.Width, Frame.Container.GdkWindow.Height));
+								Gtk.Style.PaintHandle (Frame.Style, cr, state, ShadowType.None, Frame, "paned", x, y, hw, hh, or);
+							}
 						}
 					}
-					
+
 					if (horiz)
 						x += Frame.HandleSize + Frame.HandlePadding;
 					else
