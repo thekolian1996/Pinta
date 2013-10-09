@@ -39,7 +39,7 @@ namespace Pinta.Core
 		public Gtk.Action ActualSize { get; private set; }
 		public Gtk.ToggleAction ToolBar { get; private set; }
 		public Gtk.ToggleAction PixelGrid { get; private set; }
-		public Gtk.ToggleAction Rulers { get; private set; }
+//		public Gtk.ToggleAction Rulers { get; private set; }
 		public Gtk.RadioAction Pixels { get; private set; }
 		public Gtk.RadioAction Inches { get; private set; }
 		public Gtk.RadioAction Centimeters { get; private set; }
@@ -67,7 +67,7 @@ namespace Pinta.Core
 			Gtk.IconFactory fact = new Gtk.IconFactory ();
 			fact.Add ("Menu.View.ActualSize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ActualSize.png")));
 			fact.Add ("Menu.View.Grid.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.Grid.png")));
-			fact.Add ("Menu.View.Rulers.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.Rulers.png")));
+//			fact.Add ("Menu.View.Rulers.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.Rulers.png")));
 			fact.Add ("Menu.View.ZoomIn.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomIn.png")));
 			fact.Add ("Menu.View.ZoomOut.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomOut.png")));
 			fact.Add ("Menu.View.ZoomToSelection.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.View.ZoomToSelection.png")));
@@ -81,7 +81,7 @@ namespace Pinta.Core
 			ActualSize = new Gtk.Action ("ActualSize", Catalog.GetString ("Normal Size"), null, Stock.Zoom100);
 			ToolBar = new Gtk.ToggleAction ("Toolbar", Catalog.GetString ("Toolbar"), null, null);
 			PixelGrid = new Gtk.ToggleAction ("PixelGrid", Catalog.GetString ("Pixel Grid"), null, "Menu.View.Grid.png");
-			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
+//			Rulers = new Gtk.ToggleAction ("Rulers", Catalog.GetString ("Rulers"), null, "Menu.View.Rulers.png");
 			Pixels = new Gtk.RadioAction ("Pixels", Catalog.GetString ("Pixels"), null, null, 0);
 			Inches = new Gtk.RadioAction ("Inches", Catalog.GetString ("Inches"), null, null, 1);
 			Centimeters = new Gtk.RadioAction ("Centimeters", Catalog.GetString ("Centimeters"), null, null, 2);
@@ -103,7 +103,7 @@ namespace Pinta.Core
 			
 			menu.Append (ToolBar.CreateMenuItem ());
 			menu.Append (PixelGrid.CreateMenuItem ());
-			menu.Append (Rulers.CreateMenuItem ());
+//			menu.Append (Rulers.CreateMenuItem ());
 			menu.AppendSeparator ();
 
 			ImageMenuItem zoomin = ZoomIn.CreateAcceleratedMenuItem (Gdk.Key.plus, Gdk.ModifierType.ControlMask);
@@ -125,11 +125,11 @@ namespace Pinta.Core
 
 			menu.AppendSeparator ();
 
-			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Catalog.GetString ("Ruler Units"), null, null);
-			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
-			unit_menu.Append (Pixels.CreateMenuItem ());
-			unit_menu.Append (Inches.CreateMenuItem ());
-			unit_menu.Append (Centimeters.CreateMenuItem ());
+//			Gtk.Action unit_action = new Gtk.Action ("RulerUnits", Mono.Unix.Catalog.GetString ("Ruler Units"), null, null);
+//			Menu unit_menu = (Menu)menu.AppendItem (unit_action.CreateSubMenuItem ()).Submenu;
+//			unit_menu.Append (Pixels.CreateMenuItem ());
+//			unit_menu.Append (Inches.CreateMenuItem ());
+//			unit_menu.Append (Centimeters.CreateMenuItem ());
 
 			menu.AppendSeparator ();
 			menu.Append (show_pad);

@@ -333,25 +333,25 @@ namespace Pinta
 
 		private void LoadUserSettings ()
 		{
-			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
+//			PintaCore.Actions.View.Rulers.Active = PintaCore.Settings.GetSetting ("ruler-shown", false);
 			PintaCore.Actions.View.ToolBar.Active = PintaCore.Settings.GetSetting ("toolbar-shown", true);
 			PintaCore.Actions.View.PixelGrid.Active = PintaCore.Settings.GetSetting ("pixel-grid-shown", false);
 			PintaCore.System.LastDialogDirectory = PintaCore.Settings.GetSetting (LastDialogDirSettingKey,
 			                                                                      PintaCore.System.DefaultDialogDirectory);
 
-			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
+//			var ruler_metric = (MetricType) PintaCore.Settings.GetSetting ("ruler-metric", (int) MetricType.Pixels);
 
-			switch (ruler_metric) {
-				case MetricType.Pixels:
-					PintaCore.Actions.View.Pixels.Activate ();
-					break;
-				case MetricType.Centimeters:
-					PintaCore.Actions.View.Centimeters.Activate ();
-					break;
-				case MetricType.Inches:
-					PintaCore.Actions.View.Inches.Activate ();
-					break;
-			}
+//			switch (ruler_metric) {
+//				case MetricType.Pixels:
+//					PintaCore.Actions.View.Pixels.Activate ();
+//					break;
+//				case MetricType.Centimeters:
+//					PintaCore.Actions.View.Centimeters.Activate ();
+//					break;
+//				case MetricType.Inches:
+//					PintaCore.Actions.View.Inches.Activate ();
+//					break;
+//			}
 		}
 
 		private void SaveUserSettings ()
@@ -364,16 +364,16 @@ namespace Pinta
 				PintaCore.Settings.PutSetting ("window-size-height", window_shell.GdkWindow.GetSize ().Height);
 			}
 
-			var ruler_metric = MetricType.Pixels;
+//			var ruler_metric = MetricType.Pixels;
 
-			if (PintaCore.Actions.View.Inches.Active)
-				ruler_metric = MetricType.Inches;
-			else if (PintaCore.Actions.View.Centimeters.Active)
-				ruler_metric = MetricType.Centimeters;
+//			if (PintaCore.Actions.View.Inches.Active)
+//				ruler_metric = MetricType.Inches;
+//			else if (PintaCore.Actions.View.Centimeters.Active)
+//				ruler_metric = MetricType.Centimeters;
 
-			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
+//			PintaCore.Settings.PutSetting ("ruler-metric", (int)ruler_metric);
 			PintaCore.Settings.PutSetting ("window-maximized", (window_shell.GdkWindow.State & Gdk.WindowState.Maximized) != 0);
-			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
+//			PintaCore.Settings.PutSetting ("ruler-shown", PintaCore.Actions.View.Rulers.Active);
 			PintaCore.Settings.PutSetting ("toolbar-shown", PintaCore.Actions.View.ToolBar.Active);
 			PintaCore.Settings.PutSetting ("pixel-grid-shown", PintaCore.Actions.View.PixelGrid.Active);
 			PintaCore.Settings.PutSetting (LastDialogDirSettingKey, PintaCore.System.LastDialogDirectory);

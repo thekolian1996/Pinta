@@ -79,23 +79,23 @@ namespace Pinta
 			//rulers
 //			hruler = new HRuler ();
 //			hruler.Metric = MetricType.Pixels;
-			mainTable.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
+//			mainTable.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
 //			vruler = new VRuler ();
 //			vruler.Metric = MetricType.Pixels;
-			mainTable.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
+//			mainTable.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
-			sw.Hadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			sw.Vadjustment.ValueChanged += delegate {
-				UpdateRulerRange ();
-			};
-
-			PintaCore.Workspace.CanvasSizeChanged += delegate {
-				UpdateRulerRange ();
-			};
+//			sw.Hadjustment.ValueChanged += delegate {
+//				UpdateRulerRange ();
+//			};
+//
+//			sw.Vadjustment.ValueChanged += delegate {
+//				UpdateRulerRange ();
+//			};
+//
+//			PintaCore.Workspace.CanvasSizeChanged += delegate {
+//				UpdateRulerRange ();
+//			};
 
 			canvas.MotionNotifyEvent += delegate (object o, MotionNotifyEventArgs args) {
 				if (!PintaCore.Workspace.HasOpenDocuments)
@@ -123,7 +123,7 @@ namespace Pinta
 
 			PintaCore.Chrome.InitializeCanvas (canvas);
 
-			canvas.SizeAllocated += delegate { UpdateRulerRange (); };
+//			canvas.SizeAllocated += delegate { UpdateRulerRange (); };
 
 //			PintaCore.Actions.View.Rulers.Toggled += HandleRulersToggled;
 //			PintaCore.Actions.View.Pixels.Activated += (o, e) => { SetRulersUnit (MetricType.Pixels); };
@@ -139,33 +139,33 @@ namespace Pinta
 //			vruler.Visible = visible;
 //		}
 
-		public void UpdateRulerRange ()
-		{
-			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
-
-			Cairo.PointD lower = new Cairo.PointD (0, 0);
-			Cairo.PointD upper = new Cairo.PointD (0, 0);
-
-			if (PintaCore.Workspace.HasOpenDocuments) {
-				if (PintaCore.Workspace.Offset.X > 0) {
-					lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
-					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
-				} else {
-					lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
-					upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-				if (PintaCore.Workspace.Offset.Y > 0) {
-					lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
-					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
-				} else {
-					lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
-					upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
-				}
-			}
-
-//			hruler.SetRange (lower.X, upper.X, 0, upper.X);
-//			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
-		}
+//		public void UpdateRulerRange ()
+//		{
+//			Gtk.Main.Iteration (); //Force update of scrollbar upper before recenter
+//
+//			Cairo.PointD lower = new Cairo.PointD (0, 0);
+//			Cairo.PointD upper = new Cairo.PointD (0, 0);
+//
+//			if (PintaCore.Workspace.HasOpenDocuments) {
+//				if (PintaCore.Workspace.Offset.X > 0) {
+//					lower.X = -PintaCore.Workspace.Offset.X / PintaCore.Workspace.Scale;
+//					upper.X = PintaCore.Workspace.ImageSize.Width - lower.X;
+//				} else {
+//					lower.X = sw.Hadjustment.Value / PintaCore.Workspace.Scale;
+//					upper.X = (sw.Hadjustment.Value + sw.Hadjustment.PageSize) / PintaCore.Workspace.Scale;
+//				}
+//				if (PintaCore.Workspace.Offset.Y > 0) {
+//					lower.Y = -PintaCore.Workspace.Offset.Y / PintaCore.Workspace.Scale;
+//					upper.Y = PintaCore.Workspace.ImageSize.Height - lower.Y;
+//				} else {
+//					lower.Y = sw.Vadjustment.Value / PintaCore.Workspace.Scale;
+//					upper.Y = (sw.Vadjustment.Value + sw.Vadjustment.PageSize) / PintaCore.Workspace.Scale;
+//				}
+//			}
+//
+////			hruler.SetRange (lower.X, upper.X, 0, upper.X);
+////			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
+//		}
 
 //		private void SetRulersUnit (Gtk.MetricType metric)
 //		{
