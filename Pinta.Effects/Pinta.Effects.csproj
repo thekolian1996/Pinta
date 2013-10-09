@@ -123,13 +123,13 @@
     <Compile Include="Effects\UnfocusEffect.cs" />
     <Compile Include="Effects\WarpEffect.cs" />
     <Compile Include="Effects\ZoomBlurEffect.cs" />
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\Pinta.Effects.PosterizeDialog.cs" />
+    <Compile Include="PartialWidgets\generated.cs" />
+    <Compile Include="PartialWidgets\Pinta.Effects.PosterizeDialog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\EffectHelper.cs" />
-    <Compile Include="gtk-gui\Pinta.Effects.CurvesDialog.cs" />
+    <Compile Include="PartialWidgets\Pinta.Effects.CurvesDialog.cs" />
     <Compile Include="Dialogs\Effects.CurvesDialog.cs" />
-    <Compile Include="gtk-gui\Pinta.Effects.LevelsDialog.cs" />
+    <Compile Include="PartialWidgets\Pinta.Effects.LevelsDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Pinta.Core\Pinta.Core.csproj">
@@ -151,11 +151,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
-  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>

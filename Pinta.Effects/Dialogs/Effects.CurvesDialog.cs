@@ -396,7 +396,7 @@ namespace Pinta.Effects
 			}
 		}
 		
-		private void HandleDrawingExposeEvent (object o, Gtk.ExposeEventArgs args)
+		private void HandleDrawingExposeEvent (object o, Gtk.DrawnArgs args)
 		{	
 			using (Context g = Gdk.CairoHelper.Create (drawing.GdkWindow)) {
 				
