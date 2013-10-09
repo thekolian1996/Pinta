@@ -46,7 +46,7 @@ namespace Pinta
 			DefaultHeight = height;
 
 			WindowPosition = WindowPosition.Center;
-			AllowShrink = true;
+//			AllowShrink = true;
 
 			if (maximize)
 				Maximize ();
