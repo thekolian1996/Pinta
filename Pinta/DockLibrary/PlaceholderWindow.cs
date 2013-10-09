@@ -106,7 +106,7 @@ namespace MonoDevelop.Components.Docking
 		
 		public new void Draw (Cairo.Context cr)
 		{
-			//base.OnExposeEvent (args);
+			base.Draw (cr);
 			int w, h;
 			this.GetSize (out w, out h);
 //			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);

@@ -126,11 +126,32 @@ namespace MonoDevelop.Components.Docking
 				layout.StoreAllocation ();
 		}
 		
-		public new void GetPreferredSize (out Requisition req, out Requisition req2)
+//		public new void GetPreferredSize (out Requisition req, out Requisition req2)
+//		{
+//			if (layout != null) {
+//				LayoutWidgets ();
+//				req = layout.SizeRequest ();
+//				req2 = layout.SizeRequest ();
+//			}
+//		}
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
 		{
 			if (layout != null) {
 				LayoutWidgets ();
-				req = layout.SizeRequest ();
+				minimum_height = natural_height = layout.SizeRequest ().Height;
+			} else {
+				minimum_height = natural_height = 300;
+			}
+		}
+
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			if (layout != null) {
+				LayoutWidgets ();
+				minimum_width = natural_width = layout.SizeRequest ().Width;
+			} else {
+				minimum_width = natural_width = 300;
 			}
 		}
 		
@@ -139,7 +160,8 @@ namespace MonoDevelop.Components.Docking
 			base.OnSizeAllocated (rect);
 			if (layout == null)
 				return;
-			
+
+
 			// This container has its own window, so allocation of children
 			// is relative to 0,0
 			rect.X = rect.Y = 0;
@@ -263,7 +285,7 @@ namespace MonoDevelop.Components.Docking
 					int nsize = dragSize + (newpos - dragPos);
 					currentHandleGrp.ResizeItem (currentHandleIndex, nsize);
 					//Used to use Allocation?
-					layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
+					layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
 				}
 			}
 			else if (layout != null && placeholderWindow == null) {
@@ -278,7 +300,7 @@ namespace MonoDevelop.Components.Docking
 						currentHandleGrp = grp;
 						currentHandleIndex = index;
 						//USed to use allocation
-						layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
+						layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
 					}
 				}
 				else if (currentHandleGrp != null) {
@@ -295,7 +317,7 @@ namespace MonoDevelop.Components.Docking
 			currentHandleIndex = -1;
 			if (layout != null)
 				//Used to use allocation
-				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), null, -1, true, null);
+				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), null, -1, true, null);
 		}
 		
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
@@ -438,9 +460,13 @@ namespace MonoDevelop.Components.Docking
 		public IEnumerable<Rectangle> GetShadedAreas ()
 		{
 			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
-			if (layout != null && this.GdkWindow != null)
+			if (GdkWindow == null)
+				OnRealized (); //FIXME Testing this
+			if (layout != null) {
 				//USed to be allocation
-				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, rects);
+				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, rects);
+			}
+
 			return rects;
 		}
 		

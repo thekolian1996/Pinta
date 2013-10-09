@@ -260,19 +260,19 @@ namespace MonoDevelop.Components.Docking
 				gcol.L *= 1.05;
 			gcol.L = Math.Min (1, gcol.L);
 				
-			using (Cairo.Context cr = a.Cr) {
-				cr.NewPath ();
-				cr.MoveTo (0, 0);
-				cr.RelLineTo (rect.Width, 0);
-				cr.RelLineTo (0, rect.Height);
-				cr.RelLineTo (-rect.Width, 0);
-				cr.RelLineTo (0, -rect.Height);
-				cr.ClosePath ();
+//			using (Cairo.Context cr = a.Cr) {
+				a.Cr.NewPath ();
+				a.Cr.MoveTo (0, 0);
+				a.Cr.RelLineTo (rect.Width, 0);
+				a.Cr.RelLineTo (0, rect.Height);
+				a.Cr.RelLineTo (-rect.Width, 0);
+				a.Cr.RelLineTo (0, -rect.Height);
+				a.Cr.ClosePath ();
 				Cairo.SolidPattern solidPattern = new Cairo.SolidPattern (gcol);
-				cr.Pattern = solidPattern;
-				cr.FillPreserve ();
+				a.Cr.Pattern = solidPattern;
+				a.Cr.FillPreserve ();
 				solidPattern.Destroy ();
-			}
+//			}
 			
 			a.Cr.Rectangle (rect);
 			

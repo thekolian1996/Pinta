@@ -695,8 +695,9 @@ namespace MonoDevelop.Components.Docking
 				if (it != null) {
 					if (it.Item.Widget.Parent == null)
 						it.Item.Widget.Parent = Frame.Container;
+//						Frame.Container.Add (it.Item.Widget);
 					if (!it.Item.Widget.Visible && type != DockGroupType.Tabbed)
-						it.Item.Widget.Show ();
+						it.Item.Widget.ShowAll ();
 				}
 				else
 					((DockGroup)ob).LayoutWidgets ();
