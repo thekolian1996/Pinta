@@ -97,8 +97,10 @@ namespace MonoDevelop.Components.Docking
 			//base.OnExposeEvent (args);
 			int w, h;
 			this.GetSize (out w, out h);
-			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
-			this.Window.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
+//			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
+			cr.Rectangle (0, 0, w-1, h-1);
+//			this.Window.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
+			cr.Rectangle (1, 1, w-3, h-3);
 	  		return;
 		}
 		
