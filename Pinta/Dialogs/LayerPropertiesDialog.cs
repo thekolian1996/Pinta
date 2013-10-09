@@ -141,7 +141,7 @@ namespace Pinta
 
 		private void OnBlendModeChanged (object sender, EventArgs e)
 		{
-			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.ActiveText);
+			blendmode = UserBlendOps.GetBlendModeByName (blendComboBox.GetActiveText ());
 			PintaCore.Layers.CurrentLayer.BlendMode = blendmode;
 		}
 

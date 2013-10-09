@@ -62,6 +62,7 @@ namespace Pinta.Actions
 					Screen screen = Screen.Default;
 					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), false);
 
+
 					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
 						using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {
 							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);

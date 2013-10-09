@@ -247,7 +247,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 
-		void DrawTab (Gdk.EventExpose evnt, Tab tab, int pos)
+		void DrawTab (Cairo.Context cr0, Tab tab, int pos)
 		{
 			Gdk.Rectangle rect = GetTabArea (tab, pos);
 			StateType st;

@@ -79,7 +79,7 @@ namespace Pinta
 		protected override void OnDestroyed ()
 		{
 			if (cellRenderer != null) {
-				cellRenderer.Destroy ();
+//				cellRenderer.Destroy ();
 				cellRenderer = null;
 			}
 
