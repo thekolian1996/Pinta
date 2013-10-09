@@ -262,14 +262,13 @@ namespace MonoDevelop.Components.Docking
 			if (DockFrame.IsWindows) {
 //				GdkWindow.DrawRectangle (Style.DarkGC (Gtk.StateType.Normal), false, rect);
 				cr0.Rectangle (rect);
-				rect = new Cairo.Rectangle (tabRect.X -1, tabRect.Y, tabRect.Width -1, tabRect.Height);
+				rect = new Cairo.Rectangle (tabRect.X - 1, tabRect.Y, tabRect.Width - 1, tabRect.Height);
 //				rect.X++;
 //				rect.Width--;
 				if (tab.Active) {
 //					GdkWindow.DrawRectangle (Style.LightGC (Gtk.StateType.Normal), true, rect);
 					cr0.Rectangle (rect);
-				}
-				else {
+				} else {
 					using (Cairo.Context cr = cr0) {
 						cr.NewPath ();
 						cr.MoveTo (rect.X, rect.Y);
@@ -289,9 +288,10 @@ namespace MonoDevelop.Components.Docking
 						cr.FillPreserve ();
 					}
 				}
+			} else {
+				Cairo.Context cr = new Cairo.Context (GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height));
+				Gtk.Style.PaintExtension (Style, cr, st, ShadowType.Out, this, "tab", (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height, Gtk.PositionType.Top); 
 			}
-			else
-				Gtk.Style.PaintExtension (Style, GdkWindow, st, ShadowType.Out, evnt.Area, this, "tab", rect.X, rect.Y, rect.Width, rect.Height, Gtk.PositionType.Top); 
 		}
 	}
 	
