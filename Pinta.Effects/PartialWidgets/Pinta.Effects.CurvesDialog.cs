@@ -175,7 +175,7 @@ namespace Pinta.Effects
 			w16.Expand = false;
 			w16.Fill = false;
 			// Internal child Pinta.Effects.CurvesDialog.ActionArea
-			global::Gtk.HButtonBox w17 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w17 =  this.ActionArea;
 			w17.Name = "dialog1_ActionArea";
 			w17.Spacing = 10;
 			w17.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));

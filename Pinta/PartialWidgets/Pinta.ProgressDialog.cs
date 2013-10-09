@@ -36,7 +36,7 @@ namespace Pinta
 			w3.Expand = false;
 			w3.Fill = false;
 			// Internal child Pinta.ProgressDialog.ActionArea
-			global::Gtk.HButtonBox w4 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w4 = this.ActionArea;
 			w4.Name = "dialog1_ActionArea";
 			w4.Spacing = 10;
 			w4.BorderWidth = ((uint)(5));

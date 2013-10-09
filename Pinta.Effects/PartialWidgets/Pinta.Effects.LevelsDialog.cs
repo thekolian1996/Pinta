@@ -496,7 +496,7 @@ namespace Pinta.Effects
 			w45.Expand = false;
 			w45.Fill = false;
 			// Internal child Pinta.Effects.LevelsDialog.ActionArea
-			global::Gtk.HButtonBox w46 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w46 = this.ActionArea;
 			w46.Name = "__gtksharp_58_Stetic_TopLevelDialog_ActionArea";
 			w46.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child __gtksharp_58_Stetic_TopLevelDialog_ActionArea.Gtk.ButtonBox+ButtonBoxChild

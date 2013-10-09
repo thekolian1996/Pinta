@@ -166,7 +166,7 @@ namespace Pinta
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(w1[this.hbox1]));
 			w8.Position = 0;
 			// Internal child MonoDevelop.Ide.Gui.Dialogs.ErrorDialog.ActionArea
-			global::Gtk.HButtonBox w9 = (HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w9 =  this.ActionArea;
 			w9.Name = "dialog1_ActionArea";
 			w9.Spacing = 10;
 			w9.BorderWidth = ((uint)(5));

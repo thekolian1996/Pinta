@@ -167,7 +167,7 @@ namespace Pinta
 			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(w1 [this.table1]));
 			w13.Position = 1;
 			// Internal child Pinta.NewImageDialog.ActionArea
-			global::Gtk.HButtonBox w14 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w14 =  this.ActionArea;
 			w14.Name = "dialog1_ActionArea";
 			w14.Spacing = 10;
 			w14.BorderWidth = ((uint)(5));

@@ -96,7 +96,7 @@ namespace Pinta.Effects
 			w6.Expand = false;
 			w6.Fill = false;
 			// Internal child Pinta.Effects.PosterizeDialog.ActionArea
-			global::Gtk.HButtonBox w7 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w7 = this.ActionArea;
 			w7.Name = "dialog1_ActionArea";
 			w7.Spacing = 10;
 			w7.BorderWidth = ((uint)(5));

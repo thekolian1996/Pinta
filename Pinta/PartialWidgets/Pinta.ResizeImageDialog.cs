@@ -203,7 +203,7 @@ namespace Pinta
 			w17.Expand = false;
 			w17.Fill = false;
 			// Internal child Pinta.ResizeImageDialog.ActionArea
-			global::Gtk.HButtonBox w18 = (Gtk.HButtonBox) this.ActionArea;
+			global::Gtk.ButtonBox w18 = this.ActionArea;
 			w18.Name = "dialog1_ActionArea";
 			w18.Spacing = 10;
 			w18.BorderWidth = ((uint)(5));
