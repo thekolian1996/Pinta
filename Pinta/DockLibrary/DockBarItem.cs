@@ -334,7 +334,8 @@ namespace MonoDevelop.Components.Docking
 		void SetPrelight ()
 		{
 			if (State != StateType.Prelight) {
-				State = StateType.Prelight;
+//				State = StateType.Prelight;
+				SetStateFlags (StateFlags.Prelight, true);
 				if (label != null)
 					label.ModifyFg (StateType.Normal, Style.Foreground (Gtk.StateType.Normal));
 			}
@@ -343,7 +344,8 @@ namespace MonoDevelop.Components.Docking
 		void UnsetPrelight ()
 		{
 			if (State == StateType.Prelight) {
-				State = StateType.Normal;
+//				State = StateType.Normal;
+				SetStateFlags (StateFlags.Normal, true);
 				SetNormalColor ();
 			}
 		}

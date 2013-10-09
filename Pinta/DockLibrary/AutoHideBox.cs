@@ -340,7 +340,8 @@ namespace MonoDevelop.Components.Docking
 			
 			Orientation or = horiz ? Orientation.Vertical : Orientation.Horizontal;
 			StateType s = insideGrip ? StateType.Prelight : StateType.Normal;
-			Gtk.Style.PaintHandle (w.Style, w.GdkWindow, s, ShadowType.None, args.Event.Area, w, "paned", handleRect.Left, handleRect.Top, handleRect.Width, handleRect.Height, or);
+			//FIXME: Don't knaow what this does
+//			Gtk.Style.PaintHandle (w.Style, w.GdkWindow, s, ShadowType.None, args.Event.Area, w, "paned", handleRect.Left, handleRect.Top, handleRect.Width, handleRect.Height, or);
 		}
 	}
 	
