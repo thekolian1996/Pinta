@@ -36,12 +36,12 @@ namespace Pinta.Actions
 		#region IActionHandler Members
 		public void Initialize ()
 		{
-			PintaCore.Actions.File.OpenRecent.ItemActivated += Activated;
+			PintaCore.Actions.File.OpenRecent.Activated += Activated;
 		}
 
 		public void Uninitialize ()
 		{
-			PintaCore.Actions.File.OpenRecent.ItemActivated -= Activated;
+			PintaCore.Actions.File.OpenRecent.Activated -= Activated;
 		}
 		#endregion
 
