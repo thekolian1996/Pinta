@@ -60,8 +60,13 @@ namespace MonoDevelop.Components.Docking
 			// Create the mask for the arrow
 			
 			Realize ();
-			redgc = new Gdk.GC (GdkWindow);
-	   		redgc.RgbFgColor = frame.Style.Background (StateType.Selected);
+//			redgc = new Gdk.GC (GdkWindow);
+//	   		redgc.RgbFgColor = frame.Style.Background (StateType.Selected);
+
+			redgc =  new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height));
+			Gdk.Color col = frame.Style.Background (StateType.Selected);
+			redgc.SetSourceRGB (col.Red, col.Green, col.Blue);
+
 		}
 		
 		void CreateShape (int width, int height)
@@ -71,18 +76,25 @@ namespace MonoDevelop.Components.Docking
 			black.Pixel = 1;
 			white = new Gdk.Color (255, 255, 255);
 			white.Pixel = 0;
+
+			Cairo.Context cr = new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, width, height));
+			cr.SetSourceRGB (255, 255, 255);
+			cr.Rectangle (0, 0, width, height);
+			cr.SetSourceRGB ( 0, 0, 0);
+			cr.Rectangle (0, 0, width - 1, height - 1);
+			cr.Rectangle (1, 1, width - 3, height - 3);
+
+//			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
+//			Gdk.GC gc = new Gdk.GC (pm);
+//			gc.Background = white;
+//			gc.Foreground = white;
+//			pm.DrawRectangle (gc, true, 0, 0, width, height);
+//			
+//			gc.Foreground = black;
+//			pm.DrawRectangle (gc, false, 0, 0, width - 1, height - 1);
+//			pm.DrawRectangle (gc, false, 1, 1, width - 3, height - 3);
 			
-			Gdk.Pixmap pm = new Pixmap (this.GdkWindow, width, height, 1);
-			Gdk.GC gc = new Gdk.GC (pm);
-			gc.Background = white;
-			gc.Foreground = white;
-			pm.DrawRectangle (gc, true, 0, 0, width, height);
-			
-			gc.Foreground = black;
-			pm.DrawRectangle (gc, false, 0, 0, width - 1, height - 1);
-			pm.DrawRectangle (gc, false, 1, 1, width - 3, height - 3);
-			
-			this.ShapeCombineMask (pm, 0, 0);
+//			this.ShapeCombineMask (pm, 0, 0);
 		}
 		
 		protected override void OnSizeAllocated (Rectangle allocation)
