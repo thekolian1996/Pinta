@@ -67,7 +67,7 @@ namespace Pinta
 			this.percentageRadio.Name = "percentageRadio";
 			this.percentageRadio.DrawIndicator = true;
 			this.percentageRadio.UseUnderline = true;
-			this.percentageRadio.Group = new global::GLib.SList (global::System.IntPtr.Zero);
+//			this.percentageRadio.Group = new global::GLib.SList (global::System.IntPtr.Zero);
 			this.hbox1.Add (this.percentageRadio);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.percentageRadio]));
 			w2.Position = 0;
