@@ -264,8 +264,9 @@ namespace Pinta
 			layout.Alignment = Pango.Alignment.Center;
 			layout.SetMarkup (CreditText);
 
-			backGc = new Gdk.GC (GdkWindow);
-			backGc.RgbBgColor = new Gdk.Color (49, 49, 74);
+//			backGc = new Gdk.GC (GdkWindow);
+//			backGc.RgbBgColor = new Gdk.Color (49, 49, 74);
+			backGc.SetSourceColor (new Cairo.Color (49, 49, 74));
 		}
 
 		protected override void OnDestroyed ()
