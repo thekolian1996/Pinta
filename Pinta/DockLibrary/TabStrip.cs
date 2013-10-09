@@ -180,11 +180,11 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 
-		public Gdk.Rectangle GetTabArea (int ntab)
+		public Cairo.RectangleInt GetTabArea (int ntab)
 		{
 			Gtk.Widget[] tabs = box.Children;
 			Tab tab = (Tab) tabs[ntab];
-			Gdk.Rectangle rect = GetTabArea (tab, ntab);
+			Cairo.RectangleInt rect = GetTabArea (tab, ntab);
 			int x, y;
 			tab.GdkWindow.GetRootOrigin (out x, out y);
 			rect.X += x;
@@ -207,12 +207,14 @@ namespace MonoDevelop.Components.Docking
 //				GdkWindow.DrawLine (Style.DarkGC (Gtk.StateType.Normal), Allocation.X, Allocation.Y, Allocation.Right, Allocation.Y);
 				DrawTab (cr, ctab, currentTab);
 			}
-			return base.Draw (cr);
+			base.Draw (cr);
 		}
 
-		public Gdk.Rectangle GetTabArea (Tab tab, int pos)
+		public Cairo.RectangleInt GetTabArea (Tab tab, int pos)
 		{
-			Gdk.Rectangle rect = tab.Allocation;
+			Gdk.Rectangle tabrect = tab.Allocation;
+			Cairo.RectangleInt rect = new Cairo.RectangleInt () {X = tabrect.X, Y = tabrect.Y, Width = tabrect.Width, Height = tabrect.Height};
+
 
 			int xdif = 0;
 			if (pos > 0)
@@ -249,7 +251,8 @@ namespace MonoDevelop.Components.Docking
 
 		void DrawTab (Cairo.Context cr0, Tab tab, int pos)
 		{
-			Gdk.Rectangle rect = GetTabArea (tab, pos);
+			Cairo.RectangleInt tabRect = GetTabArea (tab, pos);
+			Cairo.Rectangle rect = new Cairo.Rectangle (tabRect.X, tabRect.Y, tabRect.Width, tabRect.Height);
 			StateType st;
 			if (tab.Active)
 				st = StateType.Normal;
