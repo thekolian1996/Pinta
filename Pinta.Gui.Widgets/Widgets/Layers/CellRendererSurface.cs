@@ -77,9 +77,9 @@ namespace Pinta.Gui.Widgets
 			
 //			GetSize (widget, ref cellArea, out x, out y, out width, out height);
 
-			using (var g = Gdk.CairoHelper.Create (window)) {
+			using (var g = window) {
 				g.Save ();
-				g.Translate (x, y);
+//				g.Translate (x, y);
 				RenderCell (g, cellArea.Width, cellArea.Height);
 				g.Restore ();
 			}
