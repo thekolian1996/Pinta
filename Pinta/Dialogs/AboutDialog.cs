@@ -54,7 +54,7 @@ namespace Pinta
 		int textTop;
 		int scrollPause;
 		int scrollStart;
-		Gdk.GC backGc;
+		Cairo.Context backGc;
 
 		internal uint TimerHandle;
 
@@ -222,7 +222,7 @@ namespace Pinta
 				scroll = scrollStart;
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+		public new void Draw (Cairo.Context cr)
 		{
 			int w, h;
 
@@ -231,7 +231,7 @@ namespace Pinta
 			this.DrawText ();
 			this.DrawImageTop ();
 			
-			return false;
+			return;
 		}
 
 		protected void OnRealized (object o, EventArgs args)
@@ -273,8 +273,8 @@ namespace Pinta
 		{
 			Title = Catalog.GetString ("About Pinta");
 			//TransientFor = IdeApp.Workbench.RootWindow;
-			AllowGrow = false;
-			HasSeparator = false;
+//			AllowGrow = false;
+//			HasSeparator = false;
 			Icon = PintaCore.Resources.GetIcon ("Pinta.png");
 
 			VBox.BorderWidth = 0;

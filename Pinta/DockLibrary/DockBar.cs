@@ -166,10 +166,10 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+		public new void Draw (Cairo.Context evnt)
 		{
 			frame.ShadedContainer.DrawBackground (this);
-			return base.OnExposeEvent (evnt);
+			return base.Draw (evnt);
 		}
 	}
 }

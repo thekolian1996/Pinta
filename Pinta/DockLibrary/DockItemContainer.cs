@@ -251,7 +251,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		private void HeaderExpose (object ob, Gtk.ExposeEventArgs a)
+		private void HeaderExpose (object ob, Gtk.DrawnArgs a)
 		{
 			Gdk.Rectangle rect = new Gdk.Rectangle (0, 0, header.Allocation.Width - 1, header.Allocation.Height);
 			HslColor gcol = frame.Style.Background (Gtk.StateType.Normal);
@@ -347,7 +347,7 @@ namespace MonoDevelop.Components.Docking
 			child = widget;
 		}
 
-		protected override void OnSizeRequested (ref Requisition requisition)
+		public new void GetPreferredSize (out Requisition requisition, out Requisition req2)
 		{
 			if (child != null) {
 				requisition = child.SizeRequest ();
@@ -374,7 +374,7 @@ namespace MonoDevelop.Components.Docking
 				child.SizeAllocate (allocation);
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+		public new void Draw (Cairo.Context cr0)
 		{
 			Gdk.Rectangle rect;
 			
@@ -401,24 +401,28 @@ namespace MonoDevelop.Components.Docking
 				}
 			}
 			
-			bool res = base.OnExposeEvent (evnt);
+			base.Draw (cr0);
 			
-			Gdk.GC borderColor = Style.DarkGC (Gtk.StateType.Normal);
-			
+//			Gdk.GC borderColor = Style.DarkGC (Gtk.StateType.Normal);
+			//FIXME: We are breaking these lines!
 			rect = Allocation;
 			for (int n=0; n<topMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X, rect.Y + n, rect.Right - 1, rect.Y + n);
+//				GdkWindow.DrawLine (borderColor, rect.X, rect.Y + n, rect.Right - 1, rect.Y + n);
+				cr0.LineTo (rect.Right - 1, rect.Y + n);
 			
 			for (int n=0; n<bottomMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X, rect.Bottom - n - 1, rect.Right - 1, rect.Bottom - n - 1);
-			
+//				GdkWindow.DrawLine (borderColor, rect.X, rect.Bottom - n - 1, rect.Right - 1, rect.Bottom - n - 1);
+				cr0.LineTo (rect.Right - 1, rect.Bottom - n - 1);
+
 			for (int n=0; n<leftMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.X + n, rect.Y, rect.X + n, rect.Bottom - 1);
+//				GdkWindow.DrawLine (borderColor, rect.X + n, rect.Y, rect.X + n, rect.Bottom - 1);
+				cr0.LineTo (rect.X + n, rect.Bottom - 1);
 			
 			for (int n=0; n<rightMargin; n++)
-				GdkWindow.DrawLine (borderColor, rect.Right - n - 1, rect.Y, rect.Right - n - 1, rect.Bottom - 1);
+//				GdkWindow.DrawLine (borderColor, rect.Right - n - 1, rect.Y, rect.Right - n - 1, rect.Bottom - 1);
+				cr0.LineTo (rect.Right - n - 1, rect.Bottom - 1);
 			
-			return res;
+			return;
 		}
 	}
 }

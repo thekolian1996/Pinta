@@ -36,7 +36,7 @@ namespace MonoDevelop.Components.Docking
 {
 	internal class PlaceholderWindow: Gtk.Window
 	{
-		Gdk.GC redgc;
+		Cairo.Context redgc;
 		uint anim;
 		int rx, ry, rw, rh;
 		bool allowDocking;
@@ -92,14 +92,14 @@ namespace MonoDevelop.Components.Docking
 		}
 
 		
-		protected override bool OnExposeEvent (Gdk.EventExpose args)
+		public new void Draw (Cairo.Context cr)
 		{
 			//base.OnExposeEvent (args);
 			int w, h;
 			this.GetSize (out w, out h);
-			this.GdkWindow.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
-			this.GdkWindow.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
-	  		return true;
+			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
+			this.Window.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
+	  		return;
 		}
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)

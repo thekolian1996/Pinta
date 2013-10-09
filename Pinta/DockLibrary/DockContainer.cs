@@ -125,7 +125,7 @@ namespace MonoDevelop.Components.Docking
 				layout.StoreAllocation ();
 		}
 		
-		protected override void OnSizeRequested (ref Requisition req)
+		public new void GetPreferredSize (out Requisition req, out Requisition req2)
 		{
 			if (layout != null) {
 				LayoutWidgets ();
@@ -160,12 +160,12 @@ namespace MonoDevelop.Components.Docking
 				callback (w);
 		}
 		
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+		public new void  Draw (Cairo.Context cr)
 		{
-			bool res = base.OnExposeEvent (evnt);
+			bool res = base.Draw (cr);
 			
 			if (layout != null) {
-				layout.Draw (evnt.Area, currentHandleGrp, currentHandleIndex);
+				layout.Draw (cr, currentHandleGrp, currentHandleIndex);
 			}
 			return res;
 		}

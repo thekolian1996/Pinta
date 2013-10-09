@@ -37,13 +37,13 @@ namespace Pinta
 	{
 		private ScrolledWindow sw;
 		private PintaCanvas canvas;
-		private HRuler hruler;
-		private VRuler vruler;
+//		private HRuler hruler;
+//		private VRuler vruler;
 
 		public ScrolledWindow ScrolledWindow { get { return sw; } }
 		public PintaCanvas Canvas { get { return canvas; } }
-		public HRuler HorizontalRuler { get { return hruler; } }
-		public VRuler VerticalRuler { get { return vruler; } }
+//		public HRuler HorizontalRuler { get { return hruler; } }
+//		public VRuler VerticalRuler { get { return vruler; } }
 
 		public void Initialize (DockFrame workspace, Menu padMenu)
 		{
@@ -77,12 +77,12 @@ namespace Pinta
 			documentDockItem.Icon = PintaCore.Resources.GetIcon ("Menu.Effects.Artistic.OilPainting.png");
 
 			//rulers
-			hruler = new HRuler ();
-			hruler.Metric = MetricType.Pixels;
+//			hruler = new HRuler ();
+//			hruler.Metric = MetricType.Pixels;
 			mainTable.Attach (hruler, 1, 2, 0, 1, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
-			vruler = new VRuler ();
-			vruler.Metric = MetricType.Pixels;
+//			vruler = new VRuler ();
+//			vruler.Metric = MetricType.Pixels;
 			mainTable.Attach (vruler, 0, 1, 1, 2, AttachOptions.Shrink | AttachOptions.Fill, AttachOptions.Shrink | AttachOptions.Fill, 0, 0);
 
 			sw.Hadjustment.ValueChanged += delegate {
@@ -103,8 +103,8 @@ namespace Pinta
 
 				Cairo.PointD point = PintaCore.Workspace.WindowPointToCanvas (args.Event.X, args.Event.Y);
 
-				hruler.Position = point.X;
-				vruler.Position = point.Y;
+//				hruler.Position = point.X;
+//				vruler.Position = point.Y;
 
 			};
 
@@ -117,27 +117,27 @@ namespace Pinta
 			canvas.Show ();
 			vp.Show ();
 
-			hruler.Visible = false;
-			vruler.Visible = false;
+//			hruler.Visible = false;
+//			vruler.Visible = false;
 
 
 			PintaCore.Chrome.InitializeCanvas (canvas);
 
 			canvas.SizeAllocated += delegate { UpdateRulerRange (); };
 
-			PintaCore.Actions.View.Rulers.Toggled += HandleRulersToggled;
-			PintaCore.Actions.View.Pixels.Activated += (o, e) => { SetRulersUnit (MetricType.Pixels); };
-			PintaCore.Actions.View.Inches.Activated += (o, e) => { SetRulersUnit (MetricType.Inches); };
-			PintaCore.Actions.View.Centimeters.Activated += (o, e) => { SetRulersUnit (MetricType.Centimeters); };
+//			PintaCore.Actions.View.Rulers.Toggled += HandleRulersToggled;
+//			PintaCore.Actions.View.Pixels.Activated += (o, e) => { SetRulersUnit (MetricType.Pixels); };
+//			PintaCore.Actions.View.Inches.Activated += (o, e) => { SetRulersUnit (MetricType.Inches); };
+//			PintaCore.Actions.View.Centimeters.Activated += (o, e) => { SetRulersUnit (MetricType.Centimeters); };
 		}
 
-		private void HandleRulersToggled (object sender, EventArgs e)
-		{
-			var visible = ((ToggleAction)sender).Active;
-
-			hruler.Visible = visible;
-			vruler.Visible = visible;
-		}
+//		private void HandleRulersToggled (object sender, EventArgs e)
+//		{
+//			var visible = ((ToggleAction)sender).Active;
+//
+//			hruler.Visible = visible;
+//			vruler.Visible = visible;
+//		}
 
 		public void UpdateRulerRange ()
 		{
@@ -163,14 +163,14 @@ namespace Pinta
 				}
 			}
 
-			hruler.SetRange (lower.X, upper.X, 0, upper.X);
-			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
+//			hruler.SetRange (lower.X, upper.X, 0, upper.X);
+//			vruler.SetRange (lower.Y, upper.Y, 0, upper.Y);
 		}
 
-		private void SetRulersUnit (Gtk.MetricType metric)
-		{
-			hruler.Metric = metric;
-			vruler.Metric = metric;
-		}
+//		private void SetRulersUnit (Gtk.MetricType metric)
+//		{
+//			hruler.Metric = metric;
+//			vruler.Metric = metric;
+//		}
 	}
 }

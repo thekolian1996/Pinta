@@ -191,8 +191,8 @@ namespace MonoDevelop.Components.Docking
 			rect.Y += y;
 			return rect;
 		}
-		
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+
+		public new void Draw (Cairo.Context cr)
 		{
 			frame.ShadedContainer.DrawBackground (this);
 
@@ -200,14 +200,14 @@ namespace MonoDevelop.Components.Docking
 			for (int n=tabs.Length - 1; n>=0; n--) {
 				Tab tab = (Tab) tabs [n];
 				if (n != currentTab)
-					DrawTab (evnt, tab, n);
+					DrawTab (cr, tab, n);
 			}
 			if (currentTab != -1) {
 				Tab ctab = (Tab) tabs [currentTab];
 //				GdkWindow.DrawLine (Style.DarkGC (Gtk.StateType.Normal), Allocation.X, Allocation.Y, Allocation.Right, Allocation.Y);
-				DrawTab (evnt, ctab, currentTab);
+				DrawTab (cr, ctab, currentTab);
 			}
-			return base.OnExposeEvent (evnt);
+			return base.Draw (cr);
 		}
 
 		public Gdk.Rectangle GetTabArea (Tab tab, int pos)
@@ -376,7 +376,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		protected override void OnSizeRequested (ref Gtk.Requisition req)
+		public new void GetPreferredSize (out Gtk.Requisition req, out Gtk.Requisition req2)
 		{
 			req = Child.SizeRequest ();
 			req.Width += HorzPadding * 2;

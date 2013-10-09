@@ -152,7 +152,7 @@ namespace MonoDevelop.Components.Docking
 			AutoHide (false);
 		}
 
-		protected override bool OnExposeEvent (Gdk.EventExpose evnt)
+		public new void Draw (Cairo.Context cr)
 		{
 			if (State == StateType.Prelight) {
 				int w = Allocation.Width, h = Allocation.Height;

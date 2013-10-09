@@ -312,7 +312,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		void OnGripExpose (object ob, Gtk.ExposeEventArgs args)
+		void OnGripExpose (object ob, Gtk.DrawnArgs args)
 		{
 			EventBox w = (EventBox) ob;
 			Gdk.Rectangle handleRect = w.Allocation;
@@ -366,10 +366,10 @@ namespace MonoDevelop.Components.Docking
 			this.targetSize = targetSize;
 			QueueResize ();
 		}
-		
-		protected override void OnSizeRequested (ref Requisition req)
+
+		public new void GetPreferredSize (out Requisition req, out Requisition req2)
 		{
-			base.OnSizeRequested (ref req);
+			base.GetPreferredSize (ref req, ref req);
 			if (scrollMode || Child == null) {
 				req.Width = 0;
 				req.Height = 0;
