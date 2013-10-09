@@ -63,11 +63,10 @@ namespace Pinta.Actions
 					Document doc = PintaCore.Workspace.NewDocument (new Size (screen.Width, screen.Height), false);
 
 
-					using (Pixbuf pb = Pixbuf.FromDrawable (screen.RootWindow, screen.RootWindow.Colormap, 0, 0, 0, 0, screen.Width, screen.Height)) {
-						using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {
-							CairoHelper.SetSourcePixbuf (g, pb, 0, 0);
-							g.Paint ();
-						}
+
+					using (Cairo.Context g = new Cairo.Context (doc.UserLayers[0].Surface)) {
+						CairoHelper.SetSourceWindow (g, screen.RootWindow, 0, 0);
+						g.Paint ();
 					}
 
 					doc.IsDirty = true;

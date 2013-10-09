@@ -48,7 +48,8 @@ namespace Pinta.Actions
 		{
 			AddinManagerWindow.AllowInstall = true;
 
-			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
+			//FIXME: Need a GTK3 Mono.Addins!
+//			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
 
 			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
 		}
