@@ -169,7 +169,7 @@ namespace MonoDevelop.Components.Docking
 		public new void Draw (Cairo.Context evnt)
 		{
 			frame.ShadedContainer.DrawBackground (this);
-			return base.Draw (evnt);
+			base.Draw (evnt);
 		}
 	}
 }
