@@ -113,7 +113,7 @@ namespace MonoDevelop.Components.Docking
 			header.KeyPressEvent += HeaderKeyPress;
 			header.KeyReleaseEvent += HeaderKeyRelease;
 			header.Add (headerAlign);
-			header.ExposeEvent += HeaderExpose;
+			header.Drawn += HeaderExpose;
 			header.Realized += delegate {
 				header.GdkWindow.Cursor = handCursor;
 			};
