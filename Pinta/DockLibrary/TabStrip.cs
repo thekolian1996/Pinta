@@ -262,8 +262,9 @@ namespace MonoDevelop.Components.Docking
 			if (DockFrame.IsWindows) {
 //				GdkWindow.DrawRectangle (Style.DarkGC (Gtk.StateType.Normal), false, rect);
 				cr0.Rectangle (rect);
-				rect.X++;
-				rect.Width--;
+				rect = new Cairo.Rectangle (tabRect.X -1, tabRect.Y, tabRect.Width -1, tabRect.Height);
+//				rect.X++;
+//				rect.Width--;
 				if (tab.Active) {
 //					GdkWindow.DrawRectangle (Style.LightGC (Gtk.StateType.Normal), true, rect);
 					cr0.Rectangle (rect);

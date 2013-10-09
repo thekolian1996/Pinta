@@ -34,6 +34,7 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 using Gdk;
+using Pinta.Core;
 
 namespace MonoDevelop.Components.Docking
 {
@@ -261,7 +262,8 @@ namespace MonoDevelop.Components.Docking
 				if (newpos != dragPos) {
 					int nsize = dragSize + (newpos - dragPos);
 					currentHandleGrp.ResizeItem (currentHandleIndex, nsize);
-					layout.DrawSeparators (Allocation, currentHandleGrp, currentHandleIndex, true, null);
+					//Used to use Allocation?
+					layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
 				}
 			}
 			else if (layout != null && placeholderWindow == null) {
@@ -275,7 +277,8 @@ namespace MonoDevelop.Components.Docking
 							this.GdkWindow.Cursor = vresizeCursor;
 						currentHandleGrp = grp;
 						currentHandleIndex = index;
-						layout.DrawSeparators (Allocation, currentHandleGrp, currentHandleIndex, true, null);
+						//USed to use allocation
+						layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
 					}
 				}
 				else if (currentHandleGrp != null) {
@@ -291,7 +294,8 @@ namespace MonoDevelop.Components.Docking
 			currentHandleGrp = null;
 			currentHandleIndex = -1;
 			if (layout != null)
-				layout.DrawSeparators (Allocation, null, -1, true, null);
+				//Used to use allocation
+				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), null, -1, true, null);
 		}
 		
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
@@ -435,7 +439,8 @@ namespace MonoDevelop.Components.Docking
 		{
 			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
 			if (layout != null)
-				layout.DrawSeparators (Allocation, currentHandleGrp, currentHandleIndex, true, rects);
+				//USed to be allocation
+				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, rects);
 			return rects;
 		}
 		
