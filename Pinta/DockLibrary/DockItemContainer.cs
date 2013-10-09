@@ -253,14 +253,14 @@ namespace MonoDevelop.Components.Docking
 		
 		private void HeaderExpose (object ob, Gtk.DrawnArgs a)
 		{
-			Gdk.Rectangle rect = new Gdk.Rectangle (0, 0, header.Allocation.Width - 1, header.Allocation.Height);
+			Cairo.Rectangle rect = new Cairo.Rectangle (0, 0, header.Allocation.Width - 1, header.Allocation.Height);
 			HslColor gcol = frame.Style.Background (Gtk.StateType.Normal);
 			
 			if (pointerHover)
 				gcol.L *= 1.05;
 			gcol.L = Math.Min (1, gcol.L);
 				
-			using (Cairo.Context cr = Gdk.CairoHelper.Create (a.Event.Window)) {
+			using (Cairo.Context cr = a.Cr) {
 				cr.NewPath ();
 				cr.MoveTo (0, 0);
 				cr.RelLineTo (rect.Width, 0);
@@ -274,10 +274,10 @@ namespace MonoDevelop.Components.Docking
 				solidPattern.Destroy ();
 			}
 			
-			header.GdkWindow.DrawRectangle (frame.Style.DarkGC (Gtk.StateType.Normal), false, rect);
+			a.Cr.Rectangle (rect);
 			
 			foreach (Widget child in header.Children)
-				header.PropagateExpose (child, a.Event);
+				header.PropagateDraw (child, a.Cr);
 		}
 		
 		private void HeaderLeaveNotify (object ob, EventArgs a)
