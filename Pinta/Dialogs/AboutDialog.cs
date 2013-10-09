@@ -192,8 +192,12 @@ namespace Pinta
 //				this.GdkWindow.GetSize (out w, out h);
 				w = GdkWindow.FrameExtents.Width;
 				h = GdkWindow.FrameExtents.Height;
-				this.GdkWindow.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+//				this.GdkWindow.DrawPixbuf (backGc, image, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
+//				0);
+				Cairo.Context cr = new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, w, h));
+				Gdk.CairoHelper.SetSourcePixbuf (cr, image, 0, 0);
+				cr.Paint ();
+
 			}
 		}
 
@@ -204,8 +208,11 @@ namespace Pinta
 //				this.GdkWindow.GetSize (out w, out h);
 				w = GdkWindow.FrameExtents.Width;
 				h = GdkWindow.FrameExtents.Height;
-				this.GdkWindow.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
-				0);
+//				this.GdkWindow.DrawPixbuf (backGc, image_top, 0, 0, (w - image.Width) / 2, 0, -1, -1, RgbDither.Normal, 0,
+//				0);
+				Cairo.Context cr = new Cairo.Context (this.GdkWindow.CreateSimilarSurface (0, w, h));
+				Gdk.CairoHelper.SetSourcePixbuf (cr, image, 0, 0);
+				cr.Paint ();
 			}
 		}
 
@@ -219,8 +226,14 @@ namespace Pinta
 			int widthPixel, heightPixel;
 			layout.GetPixelSize (out widthPixel, out heightPixel);
 
-			GdkWindow.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
-			GdkWindow.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
+			//FIXME: Not sure what this does so disabled it =D
+//			GdkWindow.DrawLayout (Style.WhiteGC, 0, textTop - scroll, layout);
+//			GdkWindow.DrawPixbuf (backGc, monoPowered, 0, 0, (width / 2) - (monoPowered.Width / 2), textTop - scroll + heightPixel + monoLogoSpacing, -1, -1, RgbDither.Normal, 0, 0);
+			Cairo.Context cr = new Cairo.Context (GdkWindow.CreateSimilarSurface (0, width, height));
+			Gdk.CairoHelper.SetSourcePixbuf (cr, image, 0, 0);
+			cr.Paint ();
+
+
 
 			heightPixel = heightPixel - 80 + image.Height;
 
