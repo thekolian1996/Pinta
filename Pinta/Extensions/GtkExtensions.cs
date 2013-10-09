@@ -57,15 +57,5 @@ namespace Pinta
 			item.Show ();
 			tb.Insert (item, tb.NItems);
 		}
-
-		//FIXME: Replace all cases of iter = new Iter and blah blah with this (when things compile)
-		public static string GetActiveText(this Gtk.ComboBox comboBox)
-        	{
-           		 Gtk.TreeIter activeIter;
-            		if (!comboBox.GetActiveIter(out activeIter)) {
-            		    return null;
-           		}
-            		return (string) comboBox.Model.GetValue(activeIter, 0);
-        	}
 	}
 }

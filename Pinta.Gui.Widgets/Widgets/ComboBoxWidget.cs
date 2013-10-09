@@ -44,7 +44,7 @@ namespace Pinta.Gui.Widgets
 		}
 		
 		public string ActiveText {
-			get { return combobox.ActiveText; }
+			get { return combobox.GetActiveText (); }
 		}
 		
 		public ComboBoxWidget (string[] entries)
