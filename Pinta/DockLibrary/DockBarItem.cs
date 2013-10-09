@@ -210,8 +210,8 @@ namespace MonoDevelop.Components.Docking
 				}
 			}
 		
-			bool res = base.OnExposeEvent (evnt);
-			return res;
+			base.Draw (cr);
+			return;
 		}
 
 		public void Present (bool giveFocus)

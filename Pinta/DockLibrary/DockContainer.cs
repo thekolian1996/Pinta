@@ -162,12 +162,12 @@ namespace MonoDevelop.Components.Docking
 		
 		public new void  Draw (Cairo.Context cr)
 		{
-			bool res = base.Draw (cr);
+			base.Draw (cr);
 			
 			if (layout != null) {
 				layout.Draw (cr, currentHandleGrp, currentHandleIndex);
 			}
-			return res;
+			return;
 		}
 
 

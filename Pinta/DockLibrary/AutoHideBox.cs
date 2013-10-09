@@ -369,7 +369,7 @@ namespace MonoDevelop.Components.Docking
 
 		public new void GetPreferredSize (out Requisition req, out Requisition req2)
 		{
-			base.GetPreferredSize (ref req, ref req);
+			base.GetPreferredSize (out req, out req);
 			if (scrollMode || Child == null) {
 				req.Width = 0;
 				req.Height = 0;
