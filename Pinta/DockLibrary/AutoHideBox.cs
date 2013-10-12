@@ -368,7 +368,7 @@ namespace MonoDevelop.Components.Docking
 			QueueResize ();
 		}
 
-		public new void GetPreferredSize (out Requisition req, out Requisition req2)
+		public new void GetPreferredSize (out Requisition req )//, out Requisition req2)
 		{
 			base.GetPreferredSize (out req, out req);
 			if (scrollMode || Child == null) {

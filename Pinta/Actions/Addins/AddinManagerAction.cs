@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using Mono.Addins.Gui;
+using Mono.Addins.GuiGtk3;
 using Pinta.Core;
 
 namespace Pinta.Actions
@@ -48,8 +48,7 @@ namespace Pinta.Actions
 		{
 			AddinManagerWindow.AllowInstall = true;
 
-			//FIXME: Need a GTK3 Mono.Addins!
-//			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
+			AddinManagerWindow.Run (PintaCore.Chrome.MainWindow);
 
 			//dlg.DeleteEvent += delegate { dlg.Destroy (); };
 		}

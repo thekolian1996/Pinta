@@ -347,7 +347,7 @@ namespace MonoDevelop.Components.Docking
 			child = widget;
 		}
 
-		public new void GetPreferredSize (out Requisition requisition, out Requisition req2)
+		public new void GetPreferredSize (out Requisition requisition)//, out Requisition req2)
 		{
 			if (child != null) {
 				requisition = child.SizeRequest ();

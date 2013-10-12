@@ -382,7 +382,7 @@ namespace MonoDevelop.Components.Docking
 			}
 		}
 		
-		public new void GetPreferredSize (out Gtk.Requisition req, out Gtk.Requisition req2)
+		public new void GetPreferredSize (out Gtk.Requisition req)//, out Gtk.Requisition req2)
 		{
 			req = Child.SizeRequest ();
 			req.Width += HorzPadding * 2;
