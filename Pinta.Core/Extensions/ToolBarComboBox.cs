@@ -23,7 +23,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 using System;
 using Gtk;
 
@@ -32,22 +31,23 @@ namespace Pinta.Core
 	public class ToolBarComboBox : ToolItem
 	{
 		public ComboBox ComboBox { get; private set; }
+
 		public ListStore Model { get; private set; }
 
 		public ToolBarComboBox (int width, int activeIndex, bool allowEntry, params string[] contents)
 		{
+			Model = new ListStore (typeof (string), typeof (object));
 
-				Model = new ListStore (typeof(string), typeof (object));
+			if (contents != null) {
+				foreach (string entry in contents)
+					Model.AppendValues (entry, null);
+			}
 
-				if (contents != null)
-					foreach (string entry in contents)
-						Model.AppendValues (entry, null);
-
-				ComboBox = ComboBox.NewWithModelAndEntry(Model);
-
+			ComboBox = ComboBox.NewWithModelAndEntry (Model);
 
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
+			ComboBox.EntryTextColumn = 0;
 			
 			if (activeIndex >= 0)
 				ComboBox.Active = activeIndex;
