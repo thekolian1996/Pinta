@@ -43,11 +43,18 @@ namespace Pinta.Core
 					Model.AppendValues (entry, null);
 			}
 
-			ComboBox = ComboBox.NewWithModelAndEntry (Model);
+			if (allowEntry) {
+				ComboBox = ComboBox.NewWithModelAndEntry (Model);
+				ComboBox.EntryTextColumn = 0;
+			} else {
+				ComboBox = new ComboBox (Model);
+				var renderer = new CellRendererText ();
+				ComboBox.PackStart (renderer, true);
+				ComboBox.AddAttribute (renderer, "text", 0);
+			}
 
 			ComboBox.AddEvents ((int)Gdk.EventMask.ButtonPressMask);
 			ComboBox.WidthRequest = width;
-			ComboBox.EntryTextColumn = 0;
 			
 			if (activeIndex >= 0)
 				ComboBox.Active = activeIndex;

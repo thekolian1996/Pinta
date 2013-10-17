@@ -66,7 +66,7 @@ namespace Pinta.Tools
 				}
 				return DEFAULT_BRUSH_WIDTH;
 			}
-			set { (brush_width.ComboBox as Gtk.ComboBox).Entry.Text = value.ToString (); }
+			set { brush_width.ComboBox.Entry.Text = value.ToString (); }
 		}
 		
 		#region ToolBar
