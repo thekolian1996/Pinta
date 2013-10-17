@@ -8,7 +8,7 @@ namespace Pinta.Effects
 		private global::Gtk.Label labelMap;
 		private global::Gtk.HSeparator hseparatorMap;
 		private global::Gtk.HBox hbox2;
-		private global::Gtk.ComboBox comboMap;
+		private global::Gtk.ComboBoxText comboMap;
 		private global::Gtk.Alignment alignment3;
 		private global::Gtk.Label labelPoint;
 		private global::Gtk.DrawingArea drawing;
@@ -65,7 +65,7 @@ namespace Pinta.Effects
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.comboMap = global::Gtk.ComboBox.NewWithEntry ();
+			this.comboMap = new Gtk.ComboBoxText ();
 			this.comboMap.AppendText (global::Mono.Unix.Catalog.GetString ("RGB"));
 			this.comboMap.AppendText (global::Mono.Unix.Catalog.GetString ("Luminosity"));
 			this.comboMap.Name = "comboMap";

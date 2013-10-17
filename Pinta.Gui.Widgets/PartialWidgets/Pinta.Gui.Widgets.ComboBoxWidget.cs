@@ -8,7 +8,7 @@ namespace Pinta.Gui.Widgets
 		private global::Gtk.HBox hbox1;
 		private global::Gtk.Label label;
 		private global::Gtk.HSeparator hseparator1;
-		private global::Gtk.ComboBox combobox;
+		private global::Gtk.ComboBoxText combobox;
 		
 		protected virtual void Build ()
 		{
@@ -45,7 +45,7 @@ namespace Pinta.Gui.Widgets
 			w3.Expand = false;
 			w3.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.combobox = global::Gtk.ComboBox.NewWithEntry ();
+			this.combobox = new Gtk.ComboBoxText ();
 			this.combobox.Name = "combobox";
 			this.vbox2.Add (this.combobox);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.combobox]));

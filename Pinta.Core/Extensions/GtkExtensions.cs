@@ -206,14 +206,5 @@ namespace Pinta.Core
            		}
             		return (string) comboBox.Model.GetValue(activeIter, 0);
         	}
-
-		public static void AppendText(this Gtk.ComboBox comboBox, string text)
-        	{
-			Gtk.TreeIter activeIter;
-            		if (!comboBox.GetActiveIter(out activeIter)) {
-            		    return;
-           		}
-			comboBox.Model.SetValue (activeIter, 0, text);
-        	}
 	}
 }
