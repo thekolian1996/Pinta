@@ -463,8 +463,10 @@ namespace MonoDevelop.Components.Docking
 			if (GdkWindow == null)
 				OnRealized (); //FIXME Testing this
 			if (layout != null) {
-				//USed to be allocation
-				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, rects);
+				using (var surf = GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)) {
+					using (var ctx = new Cairo.Context (surf))
+						layout.DrawSeparators (ctx, currentHandleGrp, currentHandleIndex, true, rects);
+				}
 			}
 
 			return rects;
