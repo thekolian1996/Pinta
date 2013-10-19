@@ -103,17 +103,16 @@ namespace MonoDevelop.Components.Docking
 			CreateShape (allocation.Width, allocation.Height);
 		}
 
-		
-		public new void Draw (Cairo.Context cr)
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
-			base.Draw (cr);
+			base.OnDrawn (cr);
 			int w, h;
 			this.GetSize (out w, out h);
 //			this.Window.DrawRectangle (redgc, false, 0, 0, w-1, h-1);
 			cr.Rectangle (0, 0, w-1, h-1);
 //			this.Window.DrawRectangle (redgc, false, 1, 1, w-3, h-3);
 			cr.Rectangle (1, 1, w-3, h-3);
-	  		return;
+	  		return true;
 		}
 		
 		public void Relocate (int x, int y, int w, int h, bool animate)

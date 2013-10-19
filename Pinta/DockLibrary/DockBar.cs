@@ -165,11 +165,11 @@ namespace MonoDevelop.Components.Docking
 				}
 			}
 		}
-		
-		public new void Draw (Cairo.Context evnt)
+
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
 			frame.ShadedContainer.DrawBackground (this);
-			base.Draw (evnt);
+			return base.OnDrawn (cr);
 		}
 	}
 }

@@ -152,66 +152,63 @@ namespace MonoDevelop.Components.Docking
 			AutoHide (false);
 		}
 
-		public new void Draw (Cairo.Context ctx)
+		protected override bool OnDrawn (Cairo.Context ctx)
 		{
 			if (State == StateType.Prelight) {
 				int w = Allocation.Width, h = Allocation.Height;
 				double x=Allocation.Left, y=Allocation.Top, r=3;
 				x += 0.5; y += 0.5; h -=1; w -= 1;
+			
+				HslColor c = new HslColor (Style.Background (Gtk.StateType.Normal));
+				HslColor c1 = c;
+				HslColor c2 = c;
+				if (State != StateType.Prelight) {
+					c1.L *= 0.8;
+					c2.L *= 0.95;
+				} else {
+					c1.L *= 1.1;
+					c2.L *= 1;
+				}
+				Cairo.Gradient pat;
+				switch (bar.Position) {
+					case PositionType.Top: pat = new Cairo.LinearGradient (x, y, x, y+h); break;
+					case PositionType.Bottom: pat = new Cairo.LinearGradient (x, y, x, y+h); break;
+					case PositionType.Left: pat = new Cairo.LinearGradient (x+w, y, x, y); break;
+					default: pat = new Cairo.LinearGradient (x, y, x+w, y); break;
+				}
+				pat.AddColorStop (0, c1);
+				pat.AddColorStop (1, c2);
+				ctx.NewPath ();
+				ctx.Arc (x+r, y+r, r, 180 * (Math.PI / 180), 270 * (Math.PI / 180));
+				ctx.LineTo (x+w-r, y);
+				ctx.Arc (x+w-r, y+r, r, 270 * (Math.PI / 180), 360 * (Math.PI / 180));
+				ctx.LineTo (x+w, y+h);
+				ctx.LineTo (x, y+h);
+				ctx.ClosePath ();
+				ctx.Pattern = pat;
+				ctx.FillPreserve ();
+				c1 = c;
+				c1.L *= 0.7;
+				ctx.LineWidth = 1;
+				ctx.Color = c1;
+				ctx.Stroke ();
 				
-//				using (Cairo.Context ctx = Gdk.CairoHelper.Create (GdkWindow)) {
-					HslColor c = new HslColor (Style.Background (Gtk.StateType.Normal));
-					HslColor c1 = c;
-					HslColor c2 = c;
-					if (State != StateType.Prelight) {
-						c1.L *= 0.8;
-						c2.L *= 0.95;
-					} else {
-						c1.L *= 1.1;
-						c2.L *= 1;
-					}
-					Cairo.Gradient pat;
-					switch (bar.Position) {
-						case PositionType.Top: pat = new Cairo.LinearGradient (x, y, x, y+h); break;
-						case PositionType.Bottom: pat = new Cairo.LinearGradient (x, y, x, y+h); break;
-						case PositionType.Left: pat = new Cairo.LinearGradient (x+w, y, x, y); break;
-						default: pat = new Cairo.LinearGradient (x, y, x+w, y); break;
-					}
-					pat.AddColorStop (0, c1);
-					pat.AddColorStop (1, c2);
-					ctx.NewPath ();
-					ctx.Arc (x+r, y+r, r, 180 * (Math.PI / 180), 270 * (Math.PI / 180));
-					ctx.LineTo (x+w-r, y);
-					ctx.Arc (x+w-r, y+r, r, 270 * (Math.PI / 180), 360 * (Math.PI / 180));
-					ctx.LineTo (x+w, y+h);
-					ctx.LineTo (x, y+h);
-					ctx.ClosePath ();
-					ctx.Pattern = pat;
-					ctx.FillPreserve ();
-					c1 = c;
-					c1.L *= 0.7;
-					ctx.LineWidth = 1;
-					ctx.Color = c1;
-					ctx.Stroke ();
-					
-					// Inner line
-					ctx.NewPath ();
-					ctx.Arc (x+r+1, y+r+1, r, 180 * (Math.PI / 180), 270 * (Math.PI / 180));
-					ctx.LineTo (x+w-r-1, y+1);
-					ctx.Arc (x+w-r-1, y+r+1, r, 270 * (Math.PI / 180), 360 * (Math.PI / 180));
-					ctx.LineTo (x+w-1, y+h-1);
-					ctx.LineTo (x+1, y+h-1);
-					ctx.ClosePath ();
-					c1 = c;
-					//c1.L *= 0.9;
-					ctx.LineWidth = 1;
-					ctx.Color = c1;
-					ctx.Stroke ();
-//				}
+				// Inner line
+				ctx.NewPath ();
+				ctx.Arc (x+r+1, y+r+1, r, 180 * (Math.PI / 180), 270 * (Math.PI / 180));
+				ctx.LineTo (x+w-r-1, y+1);
+				ctx.Arc (x+w-r-1, y+r+1, r, 270 * (Math.PI / 180), 360 * (Math.PI / 180));
+				ctx.LineTo (x+w-1, y+h-1);
+				ctx.LineTo (x+1, y+h-1);
+				ctx.ClosePath ();
+				c1 = c;
+				//c1.L *= 0.9;
+				ctx.LineWidth = 1;
+				ctx.Color = c1;
+				ctx.Stroke ();
 			}
 		
-			base.Draw (ctx);
-			return;
+			return base.OnDrawn (ctx);
 		}
 
 		public void Present (bool giveFocus)

@@ -182,15 +182,16 @@ namespace MonoDevelop.Components.Docking
 			foreach (Widget w in widgets)
 				callback (w);
 		}
-		
-		public new void  Draw (Cairo.Context cr)
+
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
-			base.Draw (cr);
-			
+			bool res = base.OnDrawn (cr);
+
 			if (layout != null) {
 				layout.Draw (cr, currentHandleGrp, currentHandleIndex);
 			}
-			return;
+
+			return res;
 		}
 
 
@@ -383,7 +384,7 @@ namespace MonoDevelop.Components.Docking
 
 			Style = Style.Attach (GdkWindow);
 			Style.SetBackground (GdkWindow, State);
-			
+
 			//GdkWindow.SetBackPixmap (null, true);
 		}
 		

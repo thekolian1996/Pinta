@@ -192,7 +192,7 @@ namespace MonoDevelop.Components.Docking
 			return rect;
 		}
 
-		public new void Draw (Cairo.Context cr)
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
 			frame.ShadedContainer.DrawBackground (this);
 
@@ -207,7 +207,8 @@ namespace MonoDevelop.Components.Docking
 //				GdkWindow.DrawLine (Style.DarkGC (Gtk.StateType.Normal), Allocation.X, Allocation.Y, Allocation.Right, Allocation.Y);
 				DrawTab (cr, ctab, currentTab);
 			}
-			base.Draw (cr);
+
+			return base.OnDrawn (cr);
 		}
 
 		public Cairo.RectangleInt GetTabArea (Tab tab, int pos)
@@ -381,17 +382,28 @@ namespace MonoDevelop.Components.Docking
 				return page;
 			}
 		}
-		
-		public new void GetPreferredSize (out Gtk.Requisition req)//, out Gtk.Requisition req2)
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
 		{
-			req = Child.SizeRequest ();
-			req.Width += HorzPadding * 2;
+			Child.GetPreferredHeight (out minimum_height, out natural_height);
+
+			int extra = 0;
 			if (active)
-				req.Height += TopPaddingActive + BottomPaddingActive;
+				extra = TopPaddingActive + BottomPaddingActive;
 			else
-				req.Height += TopPadding + BottomPadding;
+				extra = TopPadding + BottomPadding;
+
+			minimum_height += extra;
+			natural_height += extra;
 		}
-					
+
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			Child.GetPreferredWidth (out minimum_width, out natural_width);
+			minimum_width += HorzPadding * 2;
+			natural_width += HorzPadding * 2;
+		}
+		
 		protected override void OnSizeAllocated (Gdk.Rectangle rect)
 		{
 			base.OnSizeAllocated (rect);
