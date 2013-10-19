@@ -285,8 +285,7 @@ namespace MonoDevelop.Components.Docking
 				if (newpos != dragPos) {
 					int nsize = dragSize + (newpos - dragPos);
 					currentHandleGrp.ResizeItem (currentHandleIndex, nsize);
-					//Used to use Allocation?
-					layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
+					DrawSeparators (currentHandleGrp, currentHandleIndex, true, null);
 				}
 			}
 			else if (layout != null && placeholderWindow == null) {
@@ -300,8 +299,7 @@ namespace MonoDevelop.Components.Docking
 							this.GdkWindow.Cursor = vresizeCursor;
 						currentHandleGrp = grp;
 						currentHandleIndex = index;
-						//USed to use allocation
-						layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), currentHandleGrp, currentHandleIndex, true, null);
+						DrawSeparators (currentHandleGrp, currentHandleIndex, true, null);
 					}
 				}
 				else if (currentHandleGrp != null) {
@@ -313,12 +311,12 @@ namespace MonoDevelop.Components.Docking
 		
 		void ResetHandleHighlight ()
 		{
-			this.GdkWindow.Cursor = null;
+			this.Window.Cursor = null;
 			currentHandleGrp = null;
 			currentHandleIndex = -1;
-			if (layout != null)
-				//Used to use allocation
-				layout.DrawSeparators (new Cairo.Context (this.GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)), null, -1, true, null);
+			if (layout != null) {
+				DrawSeparators (null, -1, true, null);
+			}
 		}
 		
 		protected override bool OnLeaveNotifyEvent (EventCrossing evnt)
@@ -460,10 +458,7 @@ namespace MonoDevelop.Components.Docking
 		{
 			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
 			if (layout != null && Window != null) {
-				using (var surf = Window.CreateSimilarSurface (Cairo.Content.ColorAlpha, Window.Width, Window.Height)) {
-					using (var ctx = new Cairo.Context (surf))
-						layout.DrawSeparators (ctx, currentHandleGrp, currentHandleIndex, true, rects);
-				}
+				DrawSeparators (currentHandleGrp, currentHandleIndex, true, rects);
 			}
 
 			return rects;
@@ -473,6 +468,15 @@ namespace MonoDevelop.Components.Docking
 		{
 			if (AreasChanged != null)
 				AreasChanged (this, EventArgs.Empty);
+		}
+
+		void DrawSeparators (DockGroup handleGroup, int handleIndex, bool invalidateOnly, List<Rectangle> areasList)
+		{
+			// TODO - used to use Allocation?
+			using (var surf = Window.CreateSimilarSurface (Cairo.Content.ColorAlpha, Window.Width, Window.Height)) {
+				using (var cr = new Cairo.Context (surf))
+					layout.DrawSeparators (cr, handleGroup, handleIndex, invalidateOnly, areasList);
+			}
 		}
 		
 		public event EventHandler AreasChanged;
