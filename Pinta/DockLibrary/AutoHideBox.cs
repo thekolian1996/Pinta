@@ -368,15 +368,24 @@ namespace MonoDevelop.Components.Docking
 			QueueResize ();
 		}
 
-		public new void GetPreferredSize (out Requisition req )//, out Requisition req2)
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
 		{
-			base.GetPreferredSize (out req, out req);
-			if (scrollMode || Child == null) {
-				req.Width = 0;
-				req.Height = 0;
-			}
+			base.OnGetPreferredHeight (out minimum_height, out natural_height);
+
+			if (scrollMode || Child == null)
+				minimum_height = natural_height = 0;
 			else
-				req = Child.SizeRequest ();
+				Child.GetPreferredHeight (out minimum_height, out natural_height);
+		}
+
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
+		{
+			base.OnGetPreferredWidth (out minimum_width, out natural_width);
+
+			if (scrollMode || Child == null)
+				minimum_width = natural_width = 0;
+			else
+				Child.GetPreferredWidth (out minimum_width, out natural_width);
 		}
 
 		protected override void OnSizeAllocated (Rectangle alloc)

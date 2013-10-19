@@ -354,10 +354,10 @@ namespace MonoDevelop.Components.Docking
 			objectIndex = 0;
 			return false;
 		}
-		
+
 		protected override void OnRealized ()
 		{
-//			WidgetFlags |= WidgetFlags.Realized;
+			IsRealized = true;
 			
 			Gdk.WindowAttr attributes = new Gdk.WindowAttr ();
 			attributes.X = Allocation.X;
@@ -365,9 +365,8 @@ namespace MonoDevelop.Components.Docking
 			attributes.Height = Allocation.Height;
 			attributes.Width = Allocation.Width;
 			attributes.WindowType = Gdk.WindowType.Child;
-//			attributes.Wclass = Gdk.WindowClass.InputOutput;
+			attributes.Wclass = Gdk.WindowWindowClass.InputOutput;
 			attributes.Visual = Visual;
-//			attributes.Colormap = Colormap;
 			attributes.EventMask = (int)(Events |
 				Gdk.EventMask.ExposureMask |
 				Gdk.EventMask.Button1MotionMask |
@@ -377,15 +376,14 @@ namespace MonoDevelop.Components.Docking
 			Gdk.WindowAttributesType attributes_mask =
 				Gdk.WindowAttributesType.X |
 				Gdk.WindowAttributesType.Y |
-//				Gdk.WindowAttributesType.Colormap |
 				Gdk.WindowAttributesType.Visual;
-			GdkWindow = new Gdk.Window (ParentWindow, attributes, (int)attributes_mask);
-			GdkWindow.UserData = Handle;
+			Window = new Gdk.Window (ParentWindow, attributes, attributes_mask);
+			Window.UserData = Handle;
 
-			Style = Style.Attach (GdkWindow);
-			Style.SetBackground (GdkWindow, State);
+			Style = Style.Attach (Window);
+			Style.SetBackground (Window, State);
 
-			//GdkWindow.SetBackPixmap (null, true);
+			Window.BackgroundPattern = null;
 		}
 		
 		internal void ShowPlaceholder ()
@@ -461,10 +459,8 @@ namespace MonoDevelop.Components.Docking
 		public IEnumerable<Rectangle> GetShadedAreas ()
 		{
 			List<Gdk.Rectangle> rects = new List<Gdk.Rectangle> ();
-			if (GdkWindow == null)
-				OnRealized (); //FIXME Testing this
-			if (layout != null) {
-				using (var surf = GdkWindow.CreateSimilarSurface (Cairo.Content.ColorAlpha, GdkWindow.Width, GdkWindow.Height)) {
+			if (layout != null && Window != null) {
+				using (var surf = Window.CreateSimilarSurface (Cairo.Content.ColorAlpha, Window.Width, Window.Height)) {
 					using (var ctx = new Cairo.Context (surf))
 						layout.DrawSeparators (ctx, currentHandleGrp, currentHandleIndex, true, rects);
 				}
