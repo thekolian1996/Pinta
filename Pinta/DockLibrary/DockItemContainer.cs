@@ -365,7 +365,7 @@ namespace MonoDevelop.Components.Docking
 			minimum_width = natural_width = 0;
 
 			if (child != null) {
-				child.GetPreferredHeight (out minimum_width, out natural_width);
+				child.GetPreferredWidth (out minimum_width, out natural_width);
 
 				var width = leftMargin + rightMargin + leftPadding + rightPadding;
 				minimum_width += width;
