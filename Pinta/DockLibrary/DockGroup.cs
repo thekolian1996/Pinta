@@ -834,8 +834,11 @@ namespace MonoDevelop.Components.Docking
 						} else {
 							StateType state = (currentHandleGrp == this && currentHandleIndex == n) ? StateType.Prelight : StateType.Normal;
 							if (!DockFrame.IsWindows) {
-								Cairo.Context cr = new Cairo.Context (Frame.Container.GdkWindow.CreateSimilarSurface (0, Frame.Container.GdkWindow.Width, Frame.Container.GdkWindow.Height));
-								Gtk.Style.PaintHandle (Frame.Style, cr, state, ShadowType.None, Frame, "paned", x, y, hw, hh, or);
+								var window = Frame.Container.Window;
+								using (var surf = window.CreateSimilarSurface (0, window.Width, window.Height)) {
+									using (var cr = new Cairo.Context (surf))
+										Gtk.Style.PaintHandle (Frame.Style, cr, state, ShadowType.None, Frame, "paned", x, y, hw, hh, or);
+								}
 							}
 						}
 					}

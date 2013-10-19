@@ -290,8 +290,10 @@ namespace MonoDevelop.Components.Docking
 					}
 				}
 			} else {
-				Cairo.Context cr = new Cairo.Context (GdkWindow.CreateSimilarSurface (0, GdkWindow.Width, GdkWindow.Height));
-				Gtk.Style.PaintExtension (Style, cr, st, ShadowType.Out, this, "tab", (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height, Gtk.PositionType.Top); 
+				using (var surf = Window.CreateSimilarSurface (0, Window.Width, Window.Height)) {
+					using (var cr = new Cairo.Context (surf))
+						Gtk.Style.PaintExtension (Style, cr, st, ShadowType.Out, this, "tab", (int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height, Gtk.PositionType.Top);
+				}
 			}
 		}
 	}
