@@ -34,6 +34,7 @@ namespace Pinta.Gui.Widgets
 	public class PointPickerGraphic : Gtk.DrawingArea
 	{
 		private bool tracking = false;
+		private const int Height = 65;
 		private Cairo.ImageSurface thumbnail;
 
 		public PointPickerGraphic ()
@@ -80,7 +81,7 @@ namespace Pinta.Gui.Widgets
 				if (position != value) {
 					position = value;
 					OnPositionChange ();
-					GdkWindow.Invalidate ();
+					Window.Invalidate ();
 				}
 			}
 		}
@@ -115,44 +116,47 @@ namespace Pinta.Gui.Widgets
 		#endregion
 
 		#region Drawing Code
-		public new void Draw (Cairo.Context cr)
+		protected override bool OnDrawn (Cairo.Context cr)
 		{
-			base.Draw (cr);
+			base.OnDrawn (cr);
 			
 			if (thumbnail == null)
 				UpdateThumbnail ();
 			
-			Rectangle rect = GdkWindow.GetBounds ();
+			Rectangle rect = Window.GetBounds ();
 			Cairo.PointD pos = PositionToClientPt (Position);
 			Cairo.Color black = new Cairo.Color (0, 0, 0);
 			
-			using (Cairo.Context g = CairoHelper.Create (GdkWindow)) {
-				//background
-				g.SetSource (thumbnail, 0.0, 0.0);
-				g.Paint ();
+			//background
+			cr.SetSource (thumbnail, 0.0, 0.0);
+			cr.Paint ();
 
-				g.DrawRectangle (new Cairo.Rectangle (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color (.75, .75, .75), 1);
-				g.DrawRectangle (new Cairo.Rectangle (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
-				
-				//cursor
-				g.DrawLine (new Cairo.PointD (pos.X + 1, rect.Top + 2), new Cairo.PointD (pos.X + 1, rect.Bottom - 2), black, 1);
-				g.DrawLine (new Cairo.PointD (rect.Left + 2, pos.Y + 1), new Cairo.PointD (rect.Right - 2, pos.Y + 1), black, 1);
-				
-				//point
-				g.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
-			}
-			return;
+			cr.DrawRectangle (new Cairo.Rectangle (rect.X + 1, rect.Y + 1, rect.Width - 1, rect.Height - 1), new Cairo.Color (.75, .75, .75), 1);
+			cr.DrawRectangle (new Cairo.Rectangle (rect.X + 2, rect.Y + 2, rect.Width - 3, rect.Height - 3), black, 1);
+			
+			//cursor
+			cr.DrawLine (new Cairo.PointD (pos.X + 1, rect.Top + 2), new Cairo.PointD (pos.X + 1, rect.Bottom - 2), black, 1);
+			cr.DrawLine (new Cairo.PointD (rect.Left + 2, pos.Y + 1), new Cairo.PointD (rect.Right - 2, pos.Y + 1), black, 1);
+			
+			//point
+			cr.DrawEllipse (new Cairo.Rectangle (pos.X - 1, pos.Y - 1, 3, 3), black, 2);
+
+			return true;
 		}
 
-		protected new void GetSizeRequest (out int height, out int width)
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
 		{
 			// Always be X pixels tall, but maintain aspect ratio
 			Size imagesize = PintaCore.Workspace.ImageSize;
-			
-			height = 65;
-			width = (imagesize.Width * height) / imagesize.Height;
+			minimum_width = natural_width = (imagesize.Width * Height) / imagesize.Height;
 			thumbnail = null;
 		}
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			minimum_height = natural_height = Height;
+		}
+
 		#endregion
 
 		#region Public Events
