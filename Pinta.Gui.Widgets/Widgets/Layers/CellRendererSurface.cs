@@ -64,25 +64,27 @@ namespace Pinta.Gui.Widgets
 			set { surface = value; }
 		}
 
-//		public override void GetPreferredSize (Widget widget, Requisition minimum_size, Requisition natural_size)
-//		{
-//			// TODO: Respect cell padding (Xpad and Ypad).
-//			minimum_size.Height = natural_size.Height = (int)cellArea.Height;
-//			minimum_size.Width = natural_size.Width = (int)cellArea.Width;
-//		}
+		protected override void OnGetSize (Widget widget, ref Gdk.Rectangle cell_area, out int x_offset,
+		                                   out int y_offset, out int width, out int height)
+		{
+			// TODO: Respect cell padding (Xpad and Ypad).
+			x_offset = cell_area.Left;
+			y_offset = cell_area.Top;
+			width = cell_area.Width;
+			height = cell_area.Height;
+		}
 
-		public new void Render (Cairo.Context window, Widget widget, Gdk.Rectangle backgroundArea, Gdk.Rectangle cellArea, Gdk.Rectangle exposeArea, CellRendererState flags)
+		protected override void OnRender (Context cr, Widget widget, Gdk.Rectangle background_area,
+		                                  Gdk.Rectangle cell_area, CellRendererState flags)
 		{
 			int x, y, width, height;
-			
-//			GetSize (widget, ref cellArea, out x, out y, out width, out height);
 
-			using (var g = window) {
-				g.Save ();
-//				g.Translate (x, y);
-				RenderCell (g, cellArea.Width, cellArea.Height);
-				g.Restore ();
-			}
+			OnGetSize (widget, ref background_area, out x, out y, out width, out height);
+
+			cr.Save ();
+			cr.Translate (x, y);
+			RenderCell (cr, cell_area.Width, cell_area.Height);
+			cr.Restore ();
 		}
 
 		private void RenderCell (Context g, int width, int height)
