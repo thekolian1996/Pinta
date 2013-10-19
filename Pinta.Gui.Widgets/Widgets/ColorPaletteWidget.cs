@@ -150,10 +150,9 @@ namespace Pinta.Gui.Widgets
 			return base.OnButtonPressEvent (ev);
 		}
 
-		public new void Draw (Cairo.Context cr)
+		protected override bool OnDrawn (Context cr)
 		{
-
-			base.Draw (cr);
+			base.OnDrawn (cr);
 			
 			using (Context g = Gdk.CairoHelper.Create (GdkWindow)) {
 				
@@ -181,16 +180,19 @@ namespace Pinta.Gui.Widgets
 				}
 			}
 			
-			return;
+			return true;
 		}
 
-		protected new void GetSizeRequest (out int height, out int width)
+		protected override void OnGetPreferredWidth (out int minimum_width, out int natural_width)
 		{
-			// Calculate desired size here.
-			height = 305;
-			width = 60;
+			minimum_width = natural_width = 60;
 		}
-		
+
+		protected override void OnGetPreferredHeight (out int minimum_height, out int natural_height)
+		{
+			minimum_height = natural_height = 305;
+		}
+
 		private int PointToPalette (int x, int y)
 		{
 			int col = -1;
