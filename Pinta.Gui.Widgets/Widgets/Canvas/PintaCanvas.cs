@@ -82,12 +82,12 @@ namespace Pinta.Gui.Widgets
 		}
 
 		#region Protected Methods
-		public new void Draw (Cairo.Context cr)
+		protected override bool OnDrawn (Cairo.Context g)
 		{
-			base.Draw (cr);
+			bool ret = base.OnDrawn (g);
 
 			if (!PintaCore.Workspace.HasOpenDocuments)
-				return;
+				return ret;
 				
 			double scale = PintaCore.Workspace.Scale;
 
@@ -114,40 +114,39 @@ namespace Pinta.Gui.Widgets
 				canvas = new Cairo.ImageSurface (Cairo.Format.Argb32, rect.Width, rect.Height);
 			}
 
-//			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
+			cr.Initialize (PintaCore.Workspace.ImageSize, PintaCore.Workspace.CanvasSize);
 
-			using (Cairo.Context g = cr) {
-				// Draw our canvas drop shadow
-				g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 2, PintaCore.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 4, PintaCore.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
-				g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, PintaCore.Workspace.CanvasSize.Width + 6, PintaCore.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
+			// Draw our canvas drop shadow
+			g.DrawRectangle (new Cairo.Rectangle (x - 1, y - 1, PintaCore.Workspace.CanvasSize.Width + 2, PintaCore.Workspace.CanvasSize.Height + 2), new Cairo.Color (.5, .5, .5), 1);
+			g.DrawRectangle (new Cairo.Rectangle (x - 2, y - 2, PintaCore.Workspace.CanvasSize.Width + 4, PintaCore.Workspace.CanvasSize.Height + 4), new Cairo.Color (.8, .8, .8), 1);
+			g.DrawRectangle (new Cairo.Rectangle (x - 3, y - 3, PintaCore.Workspace.CanvasSize.Width + 6, PintaCore.Workspace.CanvasSize.Height + 6), new Cairo.Color (.9, .9, .9), 1);
 
-				// Set up our clip rectangle
-				g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));
-				g.Clip ();
+			// Set up our clip rectangle
+			g.Rectangle (new Cairo.Rectangle (x, y, PintaCore.Workspace.CanvasSize.Width, PintaCore.Workspace.CanvasSize.Height));
+			g.Clip ();
 
-				g.Translate (x, y);
+			g.Translate (x, y);
 
-				// Render all the layers to a surface
-				var layers = PintaCore.Layers.GetLayersToPaint ();
-				if (layers.Count == 0) {
-					canvas.Clear ();
-				}
-//				cr.Render (layers, canvas, canvas_bounds.Location);
-
-				// Paint the surface to our canvas
-				g.SetSourceSurface (canvas, rect.X + (int)(0 * scale), rect.Y + (int)(0 * scale));
-				g.Paint ();
-
-				// Selection outline
-				if (PintaCore.Layers.ShowSelection) {
-	                                bool fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") &&
-						!PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
-					PintaCore.Workspace.ActiveDocument.Selection.Draw (g, scale, fillSelection);
-				}
+			// Render all the layers to a surface
+			var layers = PintaCore.Layers.GetLayersToPaint ();
+			if (layers.Count == 0) {
+				canvas.Clear ();
 			}
 
-			return;
+			cr.Render (layers, canvas, new Point (rect.X, rect.Y));
+
+			// Paint the surface to our canvas
+			g.SetSourceSurface (canvas, rect.X + (int)(0 * scale), rect.Y + (int)(0 * scale));
+			g.Paint ();
+
+			// Selection outline
+			if (PintaCore.Layers.ShowSelection) {
+                                bool fillSelection = PintaCore.Tools.CurrentTool.Name.Contains ("Select") &&
+					!PintaCore.Tools.CurrentTool.Name.Contains ("Selected");
+				PintaCore.Workspace.ActiveDocument.Selection.Draw (g, scale, fillSelection);
+			}
+
+			return ret;
 		}
 
 		protected override bool OnScrollEvent (EventScroll evnt)
