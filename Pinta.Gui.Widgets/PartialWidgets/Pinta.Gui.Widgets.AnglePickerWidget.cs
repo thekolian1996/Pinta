@@ -54,7 +54,7 @@ namespace Pinta.Gui.Widgets
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.anglepickergraphic1 = null;
+			this.anglepickergraphic1 = new AnglePickerGraphic ();
 			this.hbox2.Add (this.anglepickergraphic1);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.anglepickergraphic1]));
 			w4.Position = 0;
