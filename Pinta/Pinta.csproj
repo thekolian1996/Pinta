@@ -86,6 +86,7 @@
     <Compile Include="Actions\IActionHandler.cs" />
     <Compile Include="Actions\Image\ResizeCanvasAction.cs" />
     <Compile Include="Actions\Image\ResizeImageAction.cs" />
+    <Compile Include="Actions\Image\ShearImageAction.cs" />
     <Compile Include="Actions\Layers\LayerPropertiesAction.cs" />
     <Compile Include="Actions\Layers\RotateZoomLayerAction.cs" />
     <Compile Include="Actions\View\ImageTabsToggledAction.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Dialogs\ProgressDialog.cs" />
     <Compile Include="Dialogs\ResizeCanvasDialog.cs" />
     <Compile Include="Dialogs\ResizeImageDialog.cs" />
+    <Compile Include="Dialogs\ShearImageDialog.cs" />
     <Compile Include="Dialogs\SpinButtonEntryDialog.cs" />
     <Compile Include="Dialogs\VersionInformationTabPage.cs" />
     <Compile Include="DocumentViewContent.cs" />

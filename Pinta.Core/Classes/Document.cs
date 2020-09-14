@@ -460,7 +460,16 @@ namespace Pinta.Core
 
 			Workspace.Invalidate ();
 		}
-		
+
+		//Shear image
+		public void ShearImage (double horizontal, double vertical)
+		{
+            foreach (var layer in UserLayers)
+				layer.Shear (horizontal, vertical);
+
+			Workspace.Invalidate();
+		}
+
 		public ImageSurface GetClippedLayer (int index)
 		{
 			Cairo.ImageSurface surf = new Cairo.ImageSurface (Cairo.Format.Argb32, ImageSize.Width, ImageSize.Height);

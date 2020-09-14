@@ -223,6 +223,11 @@ namespace Pinta.Core
 			ActiveDocument.ResizeCanvas (width, height, anchor, compoundAction);
 		}
 
+		public void ShearImage (double horizontal, double vertical)
+        {
+			ActiveDocument.ShearImage (horizontal, vertical);
+        }
+
 		/// <summary>
 		/// Converts a point from the active documents
 		/// window coordinates to canvas coordinates

@@ -160,6 +160,12 @@ namespace Pinta.Core
 			PintaCore.Workspace.ActiveDocument.FlipImageVertical ();
 		}
 
+		//Shear image
+		public void Shear (double horizontal, double vertical)
+        {
+			PintaCore.Workspace.ActiveDocument.ShearImage (horizontal, vertical);
+        }
+
 		// Rotate image 180 degrees (flip H+V)
 		public void RotateImage180 ()
 		{

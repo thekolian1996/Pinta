@@ -124,6 +124,22 @@ namespace Pinta.Core
 			(old as IDisposable).Dispose ();
 		}
 
+		public void Shear (double skew_yx, double skew_xy)
+        {
+			Layer dest = PintaCore.Layers.CreateLayer ();
+
+            using (Cairo.Context g = new Cairo.Context (dest.Surface)) {
+				g.Matrix = new Matrix(1, skew_yx, skew_xy, 1, 0, 0);		//shear matrix
+				g.SetSource(Surface);
+
+				g.Paint();
+			}
+
+			Surface old = Surface;
+			Surface = dest.Surface;
+			(old as IDisposable).Dispose();
+		}
+
 		public void Draw(Context ctx)
 		{
 			Draw(ctx, Surface, Opacity);

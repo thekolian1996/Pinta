@@ -38,6 +38,7 @@ namespace Pinta.Core
 		public Gtk.Action CanvasSize { get; private set; }
 		public Gtk.Action FlipHorizontal { get; private set; }
 		public Gtk.Action FlipVertical { get; private set; }
+		public Gtk.Action Shear { get; private set; }
 		public Gtk.Action RotateCW { get; private set; }
 		public Gtk.Action RotateCCW { get; private set; }
 		public Gtk.Action Rotate180 { get; private set; }
@@ -51,6 +52,7 @@ namespace Pinta.Core
 			fact.Add ("Menu.Image.Flatten.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Flatten.png")));
 			fact.Add ("Menu.Image.FlipHorizontal.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipHorizontal.png")));
 			fact.Add ("Menu.Image.FlipVertical.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.FlipVertical.png")));
+			fact.Add ("Menu.Image.Shear.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Shear.png")));
 			fact.Add ("Menu.Image.Resize.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Resize.png")));
 			fact.Add ("Menu.Image.Rotate180CW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate180CW.png")));
 			fact.Add ("Menu.Image.Rotate90CCW.png", new Gtk.IconSet (PintaCore.Resources.GetIcon ("Menu.Image.Rotate90CCW.png")));
@@ -63,6 +65,7 @@ namespace Pinta.Core
 			CanvasSize = new Gtk.Action ("CanvasSize", Catalog.GetString ("Resize Canvas..."), null, "Menu.Image.CanvasSize.png");
 			FlipHorizontal = new Gtk.Action ("FlipHorizontal", Catalog.GetString ("Flip Horizontal"), null, "Menu.Image.FlipHorizontal.png");
 			FlipVertical = new Gtk.Action ("FlipVertical", Catalog.GetString ("Flip Vertical"), null, "Menu.Image.FlipVertical.png");
+			Shear = new Gtk.Action ("Shear", Catalog.GetString ("Shear"), null, "Menu.Image.Shear.png");
 			RotateCW = new Gtk.Action ("RotateCW", Catalog.GetString ("Rotate 90° Clockwise"), null, "Menu.Image.Rotate90CW.png");
 			RotateCCW = new Gtk.Action ("RotateCCW", Catalog.GetString ("Rotate 90° Counter-Clockwise"), null, "Menu.Image.Rotate90CCW.png");
 			Rotate180 = new Gtk.Action ("Rotate180", Catalog.GetString ("Rotate 180°"), null, "Menu.Image.Rotate180CW.png");
@@ -81,6 +84,7 @@ namespace Pinta.Core
 			menu.AppendSeparator ();
 			menu.Append (FlipHorizontal.CreateMenuItem ());
 			menu.Append (FlipVertical.CreateMenuItem ());
+			menu.Append (Shear.CreateMenuItem ());
 			menu.AppendSeparator ();
 			menu.Append (RotateCW.CreateAcceleratedMenuItem (Gdk.Key.H, Gdk.ModifierType.ControlMask));
 			menu.Append (RotateCCW.CreateAcceleratedMenuItem (Gdk.Key.G, Gdk.ModifierType.ControlMask));
@@ -93,6 +97,7 @@ namespace Pinta.Core
 		{
 			FlipHorizontal.Activated += HandlePintaCoreActionsImageFlipHorizontalActivated;
 			FlipVertical.Activated += HandlePintaCoreActionsImageFlipVerticalActivated;
+			Shear.Activated += HandlePintaCoreActionsImageShearActivated;
 			Rotate180.Activated += HandlePintaCoreActionsImageRotate180Activated;
 			Flatten.Activated += HandlePintaCoreActionsImageFlattenActivated;
 			RotateCW.Activated += HandlePintaCoreActionsImageRotateCWActivated;
@@ -186,7 +191,17 @@ namespace Pinta.Core
 			doc.History.PushNewItem (new InvertHistoryItem (InvertType.FlipHorizontal));
 		}
 
-		private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
+        private void HandlePintaCoreActionsImageShearActivated(object sender, EventArgs e)
+        {
+            Document doc = PintaCore.Workspace.ActiveDocument;
+
+            PintaCore.Tools.Commit();
+            //doc.ShearImage(0.2, 0.3);
+
+            doc.History.PushNewItem(new InvertHistoryItem(InvertType.Shear));
+        }
+
+        private void HandlePintaCoreActionsImageCropToSelectionActivated (object sender, EventArgs e)
 		{
 			Document doc = PintaCore.Workspace.ActiveDocument;
 

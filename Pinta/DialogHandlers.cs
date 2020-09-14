@@ -27,6 +27,7 @@
 using System;
 using System.Collections.Generic;
 using Pinta.Actions;
+using Pinta.Actions.Image;
 using Pinta.Core;
 
 namespace Pinta
@@ -60,6 +61,7 @@ namespace Pinta
 			// Image
 			action_handlers.Add (new ResizeImageAction ());
 			action_handlers.Add (new ResizeCanvasAction ());
+			action_handlers.Add (new ShearImageAction ());
 
 			// Layers
 			action_handlers.Add (new LayerPropertiesAction ());
@@ -131,6 +133,7 @@ namespace Pinta
 			PintaCore.Actions.Image.Resize.Sensitive = enable;
 			PintaCore.Actions.Image.FlipHorizontal.Sensitive = enable;
 			PintaCore.Actions.Image.FlipVertical.Sensitive = enable;
+			PintaCore.Actions.Image.Shear.Sensitive = enable;
 			PintaCore.Actions.Image.Rotate180.Sensitive = enable;
 			PintaCore.Actions.Image.RotateCCW.Sensitive = enable;
 			PintaCore.Actions.Image.RotateCW.Sensitive = enable;

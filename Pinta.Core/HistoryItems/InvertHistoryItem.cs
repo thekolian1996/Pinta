@@ -58,6 +58,10 @@ namespace Pinta.Core
 					Text = Catalog.GetString ("Flip Image Vertical");
 					Icon = "Menu.Image.FlipVertical.png";
 					break;
+				case InvertType.Shear:
+					Text = Catalog.GetString ("Shear Image");
+					Icon = "Menu.Image.Shear.png";
+					break;
 				case InvertType.Rotate90CW:
 					Text = Catalog.GetString ("Rotate 90° Clockwise");
 					Icon = "Menu.Image.Rotate90CW.png";
@@ -115,6 +119,9 @@ namespace Pinta.Core
 					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
+				case InvertType.Shear:
+					PintaCore.Layers.Shear (0.2, 0.3);
+					break;
 			}
 		}
 
@@ -147,6 +154,9 @@ namespace Pinta.Core
 					PintaCore.Workspace.ActiveDocument.UserLayers[layer_index].FlipVertical ();
 					PintaCore.Workspace.Invalidate ();
 					break;
+				case InvertType.Shear:
+					PintaCore.Layers.Shear (0.2, 0.3);
+					break;
 			}
 		}
 	}
@@ -160,6 +170,7 @@ namespace Pinta.Core
 		Rotate90CW,
 		Rotate90CCW,
 		FlipLayerHorizontal,
-		FlipLayerVertical
+		FlipLayerVertical,
+		Shear
 	}
 }
