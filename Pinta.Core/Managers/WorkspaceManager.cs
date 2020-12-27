@@ -164,7 +164,7 @@ namespace Pinta.Core
 			}
 
 			doc.Workspace.History.PushNewItem (new BaseHistoryItem (Stock.New, Catalog.GetString ("New Image")));
-			doc.IsDirty = false;
+			doc.Workspace.History.SetClean();
 
 			// This ensures these are called after the window is done being created and sized.
 			// Without it, we sometimes try to zoom when the window has a size of (0, 0).
@@ -193,7 +193,7 @@ namespace Pinta.Core
 
 				PintaCore.Workspace.ActiveDocument.PathAndFileName = file;
 				PintaCore.Workspace.ActiveWorkspace.History.PushNewItem (new BaseHistoryItem (Stock.Open, Catalog.GetString ("Open Image")));
-				PintaCore.Workspace.ActiveDocument.IsDirty = false;
+				PintaCore.Workspace.ActiveDocument.History.SetClean();
 				PintaCore.Workspace.ActiveDocument.HasFile = true;
 
                 // This ensures these are called after the window is done being created and sized.
@@ -358,7 +358,7 @@ namespace Pinta.Core
 			string markup = "<span weight=\"bold\" size=\"larger\">{0}</span>\n\n{1}";
 
 			string secondaryText = string.Format(Catalog.GetString("Could not open file: {0}"), filename);
-			secondaryText += string.Format(Catalog.GetString($"{Environment.NewLine}{Environment.NewLine}Pinta supports the following file formats:{Environment.NewLine}"));
+			secondaryText += string.Format("\n\n{0}\n", Catalog.GetString("Pinta supports the following file formats:"));
 			var extensions = from format in PintaCore.System.ImageFormats.Formats
 							 where format.Importer != null
 							 from extension in format.Extensions
